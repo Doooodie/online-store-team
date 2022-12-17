@@ -3,9 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './index.css';
 
-import Layout from './components/Layout/Layout';
-import NoPage from './components/NoPage/NoPage';
-import Home from './components/Home/Home';
+import Layout from './pages/Layout/Layout';
+import NoPage from './pages/NoPage/NoPage';
+import Home from './pages/Home/Home';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
