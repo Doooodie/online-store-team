@@ -1,21 +1,6 @@
-/* eslint-disable */
+import MyButton from '../../UI/button/MyButton';
 import styles from './Product.module.css';
-
-interface ProductProps {
-  product: {
-    id: number;
-    title: string;
-    description: string;
-    price: number;
-    discountPercentage: number;
-    rating: number;
-    stock: number;
-    brand: string;
-    category: string;
-    thumbnail: string;
-    images: string[];
-  }
-}
+import { ProductProps } from '../../types/types';
 
 export default function Product({ product }: ProductProps) {
   return (
@@ -30,8 +15,8 @@ export default function Product({ product }: ProductProps) {
           <li>Rating: {product.rating}</li>
           <li>Stock: {product.stock}</li>
         </ul>
-        <button type='button'>Add to card</button>
-        <button type='button'>Details</button>
+        <MyButton name='add to card' />
+        <MyButton name='details' />
       </div>
     </div>
   );
