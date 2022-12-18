@@ -1,13 +1,8 @@
-/* eslint-disable */
-import styles from './Container.module.css'
+import styles from './Container.module.css';
 
-interface containerProps {
-    children?:  React.ReactChild | React.ReactNode
+interface ContainerProps {
+  children: React.ReactChild | React.ReactNode;
 }
-export default function Container(props : containerProps) {
-    return(
-        <div className={styles.container}>
-            {props.children}
-        </div>
-    )
+export default function Container({ children }: ContainerProps) {
+  return <div className={styles.container}>{children}</div>;
 }
