@@ -9,7 +9,7 @@ import './Home.css';
 
 function Home() {
   const productsArray = dataProducts.products;
-  const [products, setProducts] = useState(productsArray);
+  const [products] = useState(productsArray);
   const [filter, setFilter] = useState<IFilter>({ sort: 'default', query: '' });
   const filteredProducts = useFilterProducts(products, filter.sort, filter.query);
 
