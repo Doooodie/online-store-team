@@ -20,10 +20,7 @@ export interface IProduct {
 }
 
 export interface IProductFilter  {
-  filter: {
-    query: string
-    sort: string
-  }
+  filter: IFilter
   setFilter: Function
 }
 
@@ -58,4 +55,6 @@ export interface ProductProps {
 export interface IFilter { 
   sort: string;
   query: string;
+  minPrice: number;
+  maxPrice: number;
 }

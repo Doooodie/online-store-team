@@ -10,7 +10,12 @@ import './Home.css';
 function Home() {
   const productsArray = dataProducts.products;
   const [products] = useState(productsArray);
-  const [filter, setFilter] = useState<IFilter>({ sort: 'default', query: '' });
+  const [filter, setFilter] = useState<IFilter>({
+    sort: 'default',
+    query: '',
+    minPrice: 0,
+    maxPrice: 100,
+  });
   const filteredProducts = useFilterProducts(products, filter.sort, filter.query);
 
   return (
