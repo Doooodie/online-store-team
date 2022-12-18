@@ -8,7 +8,9 @@ export default function ProductFilter({ filter, setFilter }: IProductFilter) {
       <MyInput
         placeholder='Search...'
         value={filter.query}
-        onChange={(e: any) => setFilter({ ...filter, query: e.target.value })}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setFilter({ ...filter, query: e.target.value })
+        }
       />
       <MySelect
         defaultValue='Sort options...'
@@ -21,7 +23,7 @@ export default function ProductFilter({ filter, setFilter }: IProductFilter) {
           { value: 'discount-ASC', name: 'Sort by discount ASC' },
           { value: 'discount-DESC', name: 'Sort by discount DESC' },
         ]}
-        onChange={(e: any) => setFilter({ ...filter, sort: e.target.value })}
+        onChange={(e) => setFilter({ ...filter, sort: e.target.value })}
       />
     </div>
   );
