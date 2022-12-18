@@ -1,16 +1,8 @@
-interface MySelectProps {
-  defaultValue: string;
-  options: IOptions[];
-}
+import { MySelectProps } from '../../types/types';
 
-interface IOptions {
-  value: string;
-  name: string;
-}
-
-export default function MySelect({ defaultValue, options }: MySelectProps) {
+export default function MySelect({ defaultValue, value, options, onChange }: MySelectProps) {
   return (
-    <select>
+    <select value={value} onChange={onChange}>
       <option value=''>{defaultValue}</option>
       {options.map((option) => (
         <option key={option.value} value={option.value}>
