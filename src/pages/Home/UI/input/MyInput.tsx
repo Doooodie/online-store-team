@@ -3,7 +3,7 @@ import styles from './MyInput.module.css';
 interface MyInputProps {
   placeholder: string;
   value: string;
-  onChange: (e: any) => void;
+  onChange: (e: React.FormEvent<HTMLInputElement>) => void;
 }
 
 export default function MyInput({ placeholder, value, onChange }: MyInputProps) {
