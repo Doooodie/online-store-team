@@ -1,6 +1,7 @@
 import MyInput from '../../UI/input/MyInput';
 import MySelect from '../../UI/select/MySelect';
 import { IProductFilter } from '../../types/types';
+import RangeSlider from '../../UI/rangeSlider/MyRangeSlider';
 
 export default function ProductFilter({ filter, setFilter }: IProductFilter) {
   return (
@@ -8,9 +9,7 @@ export default function ProductFilter({ filter, setFilter }: IProductFilter) {
       <MyInput
         placeholder='Search...'
         value={filter.query}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setFilter({ ...filter, query: e.target.value })
-        }
+        onChange={(e) => setFilter({ ...filter, query: e.target.value })}
       />
       <MySelect
         defaultValue='Sort options...'
@@ -25,6 +24,7 @@ export default function ProductFilter({ filter, setFilter }: IProductFilter) {
         ]}
         onChange={(e) => setFilter({ ...filter, sort: e.target.value })}
       />
+      <RangeSlider filter={filter} setFilter={setFilter} title='Price' step={5} />
     </div>
   );
 }

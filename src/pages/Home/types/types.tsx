@@ -20,8 +20,8 @@ export interface IProduct {
 }
 
 export interface IProductFilter  {
-  filter: IFilter
-  setFilter: Function
+  filter: IFilter;
+  setFilter: (e: any) => any;
 }
 
 export interface MySelectProps {
@@ -51,7 +51,6 @@ export interface ProductProps {
     images: string[];
   };
 }
-
 export interface IFilter { 
   sort: string;
   query: string;

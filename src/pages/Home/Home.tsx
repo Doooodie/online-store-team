@@ -13,8 +13,8 @@ function Home() {
   const [filter, setFilter] = useState<IFilter>({
     sort: 'default',
     query: '',
-    minPrice: 0,
-    maxPrice: 100,
+    minPrice: 10,
+    maxPrice: 1749,
   });
   const filteredProducts = useFilterProducts(products, filter.sort, filter.query);
 
