@@ -32,8 +32,27 @@ export function useSearchProducts(products: IProduct[], query: string) {
   return searchProducts;
 }
 
-export function useFilterProducts(products: IProduct[], sort: string, query: string) {
+export function useSortByPrice(products: IProduct[], minPrice: number, maxPrice: number) {
+  const sortByPrice = useMemo(
+    () => [...products].filter((product) => product.price > minPrice && product.price < maxPrice),
+    [products, minPrice, maxPrice],
+  );
+  return sortByPrice;
+}
+
+export function useFilterProducts(
+  products: IProduct[],
+  sort: string,
+  query: string,
+  minPrice: number,
+  maxPrice: number,
+) {
   const sortedProducts = useSortedPost(products, sort);
   const sortedAndSearchProducts = useSearchProducts(sortedProducts, query);
-  return sortedAndSearchProducts;
+  const sortedWithPriceAndSearchProduects = useSortByPrice(
+    sortedAndSearchProducts,
+    minPrice,
+    maxPrice,
+  );
+  return sortedWithPriceAndSearchProduects;
 }
