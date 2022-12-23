@@ -56,4 +56,6 @@ export interface IFilter {
   query: string;
   minPrice: number;
   maxPrice: number;
+  minStock: number;
+  maxStock: number;
 }

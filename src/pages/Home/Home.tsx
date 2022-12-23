@@ -15,6 +15,8 @@ function Home() {
     query: '',
     minPrice: 0,
     maxPrice: 1749,
+    minStock: 2,
+    maxStock: 150,
   });
   const filteredProducts = useFilterProducts(
     products,
@@ -22,6 +24,8 @@ function Home() {
     filter.query,
     filter.minPrice,
     filter.maxPrice,
+    filter.minStock,
+    filter.maxStock,
   );
 
   return (

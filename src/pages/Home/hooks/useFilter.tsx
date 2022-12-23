@@ -40,12 +40,22 @@ export function useSortByPrice(products: IProduct[], minPrice: number, maxPrice:
   return sortByPrice;
 }
 
+export function useSortByStock(products: IProduct[], minStock: number, maxStock: number) {
+  const sortByStock = useMemo(
+    () => [...products].filter((product) => product.stock > minStock && product.stock < maxStock),
+    [products, minStock, maxStock],
+  );
+  return sortByStock;
+}
+
 export function useFilterProducts(
   products: IProduct[],
   sort: string,
   query: string,
   minPrice: number,
   maxPrice: number,
+  minStock: number,
+  maxStock: number,
 ) {
   const sortedProducts = useSortedPost(products, sort);
   const sortedAndSearchProducts = useSearchProducts(sortedProducts, query);
@@ -54,5 +64,10 @@ export function useFilterProducts(
     minPrice,
     maxPrice,
   );
-  return sortedWithPriceAndSearchProduects;
+  const sortedWithPriceStockSearchProducts = useSortByStock(
+    sortedWithPriceAndSearchProduects,
+    minStock,
+    maxStock,
+  );
+  return sortedWithPriceStockSearchProducts;
 }
