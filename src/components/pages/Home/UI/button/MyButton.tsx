@@ -1,31 +1,23 @@
+import React from 'react';
 import styles from './MyButton.module.css';
+import { useAppDispatch } from '../../../../hooks';
+import { addToCart } from '../../../../store/cartSlice';
 
 interface MyButtonProps {
   name: string;
-  id?: number;
-  price?: number;
+  id: number;
+  price: number;
 }
 
-export default function MyButton({ name, id, price }: MyButtonProps) {
-  function saveDetails() {
-    if (!localStorage.doodieStore) {
-      const productInfo = JSON.stringify([{ id, price }]);
-      localStorage.setItem('doodieStore', productInfo);
-    } else {
-      const storage = JSON.parse(localStorage.doodieStore);
-      const productsInfo = JSON.stringify([...storage, { id, price }]);
-      localStorage.setItem('doodieStore', productsInfo);
-    }
-  }
+const MyButton: React.FC<MyButtonProps> = function MyButton({ name, id, price }) {
+  const dispatch = useAppDispatch();
+  const addTask = () => dispatch(addToCart({ id, price }));
 
   return (
-    <button type='button' className={styles.button} onClick={saveDetails}>
+    <button type='button' className={styles.button} onClick={addTask}>
       {name}
     </button>
   );
-}
-
-MyButton.defaultProps = {
-  id: 0,
-  price: 0,
 };
+
+export default MyButton;
