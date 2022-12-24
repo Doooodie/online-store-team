@@ -2,8 +2,8 @@ import HeaderLink from './components/HeaderLink/HeaderLink';
 import CartItems from './components/CartItems/CartItems';
 import CartTotal from './components/CartTotal/CartTotal';
 
-import shoppingBag from '../../../../assets/img/shopping-bag.png';
-import shoppingCart from '../../../../assets/img/shopping-cart.png';
+import shoppingBag from '../../../../../assets/img/shopping-bag.png';
+import shoppingCart from '../../../../../assets/img/shopping-cart.png';
 
 import './Header.css';
 
