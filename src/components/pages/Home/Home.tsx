@@ -4,7 +4,7 @@ import Container from './components/Container/Container';
 import ProductFilter from './components/ProductsFilter/ProductFilter';
 import { IFilter } from './types/types';
 import { useFilterProducts } from './hooks/useFilter';
-import dataProducts from '../../assets/json/products.json';
+import dataProducts from '../../../assets/json/products.json';
 import './Home.css';
 
 function Home() {
