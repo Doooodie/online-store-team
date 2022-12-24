@@ -16,7 +16,7 @@ export default function RangeSlider({ filter, setFilter, title, step }: SliderPr
   const handleChange = (event: Event, newValue: number | number[]) => {
     const minValue: number = Math.min.apply(null, newValue as number[]);
     const maxValue: number = Math.max.apply(null, newValue as number[]);
-    setFilter({ ...filter, minPrice: minValue, maxPrice: maxValue });
+    setFilter({ ...filter, price: { min: minValue, max: maxValue } });
   };
 
   return (
@@ -24,7 +24,7 @@ export default function RangeSlider({ filter, setFilter, title, step }: SliderPr
       <h2>{title}</h2>
       <Slider
         getAriaLabel={() => 'Temperature range'}
-        value={[filter.minPrice, filter.maxPrice]}
+        value={[filter.price.min, filter.price.max]}
         onChange={handleChange}
         valueLabelDisplay='auto'
         getAriaValueText={valuetext}

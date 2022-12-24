@@ -1,6 +1,11 @@
 import { useMemo } from 'react';
 import { IProduct, ISelectedSort } from '../types/types';
 
+interface ISlider {
+  min: number;
+  max: number;
+}
+
 export function useSortedPost(products: IProduct[], sort: string) {
   const getSortedProducts = useMemo(() => {
     const sortValue = sort.split('-')[0] as keyof ISelectedSort;
@@ -32,42 +37,35 @@ export function useSearchProducts(products: IProduct[], query: string) {
   return searchProducts;
 }
 
-export function useSortByPrice(products: IProduct[], minPrice: number, maxPrice: number) {
+export function useSortByPrice(products: IProduct[], price: ISlider) {
   const sortByPrice = useMemo(
-    () => [...products].filter((product) => product.price > minPrice && product.price < maxPrice),
-    [products, minPrice, maxPrice],
+    () => [...products].filter((product) => product.price > price.min && product.price < price.max),
+    [products, price.min, price.max],
   );
   return sortByPrice;
 }
 
-export function useSortByStock(products: IProduct[], minStock: number, maxStock: number) {
-  const sortByStock = useMemo(
-    () => [...products].filter((product) => product.stock > minStock && product.stock < maxStock),
-    [products, minStock, maxStock],
+export function useSortByStock(products: IProduct[], stock: ISlider) {
+  const sortByPrice = useMemo(
+    () => [...products].filter((product) => product.stock > stock.min && product.stock < stock.max),
+    [products, stock.min, stock.max],
   );
-  return sortByStock;
+  return sortByPrice;
 }
 
 export function useFilterProducts(
   products: IProduct[],
   sort: string,
   query: string,
-  minPrice: number,
-  maxPrice: number,
-  minStock: number,
-  maxStock: number,
+  price: ISlider,
+  stock: ISlider,
 ) {
   const sortedProducts = useSortedPost(products, sort);
   const sortedAndSearchProducts = useSearchProducts(sortedProducts, query);
-  const sortedWithPriceAndSearchProduects = useSortByPrice(
-    sortedAndSearchProducts,
-    minPrice,
-    maxPrice,
-  );
+  const sortedWithPriceAndSearchProduects = useSortByPrice(sortedAndSearchProducts, price);
   const sortedWithPriceStockSearchProducts = useSortByStock(
     sortedWithPriceAndSearchProduects,
-    minStock,
-    maxStock,
+    stock,
   );
   return sortedWithPriceStockSearchProducts;
 }

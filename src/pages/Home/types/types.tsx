@@ -54,8 +54,12 @@ export interface ProductProps {
 export interface IFilter { 
   sort: string;
   query: string;
-  minPrice: number;
-  maxPrice: number;
-  minStock: number;
-  maxStock: number;
+  price: {
+    min: number
+    max: number
+  }
+  stock: {
+    min: number,
+    max: number,
+  }
 }
