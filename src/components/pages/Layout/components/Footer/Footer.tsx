@@ -1,5 +1,5 @@
 import './Footer.css';
-import RSSchoolLogo from '../../../../assets/img/rsschool-logo.svg';
+import RSSchoolLogo from '../../../../../assets/img/rsschool-logo.svg';
 
 function Footer() {
   return (
