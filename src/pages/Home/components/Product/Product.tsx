@@ -15,7 +15,7 @@ export default function Product({ product }: ProductProps) {
           <li>Rating: {product.rating}</li>
           <li>Stock: {product.stock}</li>
         </ul>
-        <MyButton name='add to card' />
+        <MyButton name='add to card' id={product.id} price={product.price} />
         <MyButton name='details' />
       </div>
     </div>
