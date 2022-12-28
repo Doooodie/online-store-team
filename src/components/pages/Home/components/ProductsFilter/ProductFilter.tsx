@@ -1,10 +1,17 @@
 import MyInput from '../../UI/input/MyInput';
 import MySelect from '../../UI/select/MySelect';
 import { IProductFilter } from '../../types/types';
-import RangeSlider from '../../UI/rangeSlider/MyRangeSlider';
+import RangeSliderPrice from '../../UI/rangeSlider/MyRangeSliderPrice';
 import RangeSliderStock from '../../UI/rangeSlider/MyRangeSliderStock';
 
-export default function ProductFilter({ filter, setFilter }: IProductFilter) {
+export default function ProductFilter({
+  filter,
+  setFilter,
+  price,
+  stock,
+  setPrice,
+  setStock,
+}: IProductFilter) {
   return (
     <div>
       <MyInput
@@ -25,8 +32,8 @@ export default function ProductFilter({ filter, setFilter }: IProductFilter) {
         ]}
         onChange={(e) => setFilter({ ...filter, sort: e.target.value })}
       />
-      <RangeSlider filter={filter} setFilter={setFilter} title='Price' step={5} />
-      <RangeSliderStock filter={filter} setFilter={setFilter} title='Stock' step={1} />
+      <RangeSliderPrice price={price} setPrice={setPrice} title='Price' step={5} />
+      <RangeSliderStock stock={stock} setStock={setStock} title='Stock' step={1} />
     </div>
   );
 }

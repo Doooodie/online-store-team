@@ -4,6 +4,7 @@ import { IProduct, ISelectedSort } from '../types/types';
 interface ISlider {
   min: number;
   max: number;
+  isDefault: boolean;
 }
 
 export function useSortedPost(products: IProduct[], sort: string) {
@@ -38,19 +39,27 @@ export function useSearchProducts(products: IProduct[], query: string) {
 }
 
 export function useSortByPrice(products: IProduct[], price: ISlider) {
-  const sortByPrice = useMemo(
-    () => [...products].filter((product) => product.price > price.min && product.price < price.max),
-    [products, price.min, price.max],
-  );
+  const sortByPrice = useMemo(() => {
+    if (price.isDefault) {
+      return [...products];
+    }
+    return [...products].filter(
+      (product) => product.price >= price.min && product.price <= price.max,
+    );
+  }, [products, price.min, price.max, price.isDefault]);
   return sortByPrice;
 }
 
 export function useSortByStock(products: IProduct[], stock: ISlider) {
-  const sortByPrice = useMemo(
-    () => [...products].filter((product) => product.stock > stock.min && product.stock < stock.max),
-    [products, stock.min, stock.max],
-  );
-  return sortByPrice;
+  const SortByStock = useMemo(() => {
+    if (stock.isDefault) {
+      return [...products];
+    }
+    return [...products].filter(
+      (product) => product.stock >= stock.min && product.stock <= stock.max,
+    );
+  }, [products, stock.min, stock.max, stock.isDefault]);
+  return SortByStock;
 }
 
 export function useFilterProducts(

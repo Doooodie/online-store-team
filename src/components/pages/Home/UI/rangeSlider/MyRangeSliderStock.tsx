@@ -1,22 +1,28 @@
+/* eslint-disable */ 
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { IFilter } from '../../types/types';
+import { IFilter, SliderChange } from '../../types/types';
 
 interface SliderProps {
-  filter: IFilter;
   title: string;
   step: number;
-  setFilter: (value: IFilter) => void;
+  stock: SliderChange;
+  setStock: (value: any) => void;
 }
 function valuetext(value: number) {
   return `${value}°C`;
 }
 
-export default function RangeSliderStock({ filter, setFilter, title, step }: SliderProps) {
+export default function RangeSliderStock({
+  title,
+  step,
+  stock,
+  setStock,
+}: SliderProps) {
   const handleChange = (event: Event, newValue: number | number[]) => {
     const minValue: number = Math.min.apply(null, newValue as number[]);
     const maxValue: number = Math.max.apply(null, newValue as number[]);
-    setFilter({ ...filter, stock: { min: minValue, max: maxValue } });
+    setStock({ min: minValue, max: maxValue, isDefault: false });
   };
 
   return (
@@ -24,7 +30,7 @@ export default function RangeSliderStock({ filter, setFilter, title, step }: Sli
       <h2>{title}</h2>
       <Slider
         getAriaLabel={() => 'Temperature range'}
-        value={[filter.stock.min, filter.stock.max]}
+        value={[stock.min, stock.max]}
         onChange={handleChange}
         valueLabelDisplay='auto'
         getAriaValueText={valuetext}
