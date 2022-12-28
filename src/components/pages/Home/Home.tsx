@@ -16,50 +16,44 @@ function Home() {
     query: '',
   });
 
-  const [sliderIntervalPrice, setSliderIntervalPrice] = useState({
+  const [price, setPrice] = useState({
     min: 0,
     max: 1499,
     isDefault: true,
   });
 
-  const [sliderIntervalStock, setSliderIntervalStock] = useState({
+  const [stock, setStock] = useState({
     min: 2,
     max: 150,
     isDefault: true,
   });
 
-  const filteredProducts = useFilterProducts(
-    products,
-    filter.sort,
-    filter.query,
-    sliderIntervalPrice,
-    sliderIntervalStock,
-  );
+  const filteredProducts = useFilterProducts(products, filter.sort, filter.query, price, stock);
 
   const resultPrice = findInterval(filteredProducts, KeysOfProduct.price);
   const resultStock = findInterval(filteredProducts, KeysOfProduct.stock);
 
   useEffect(() => {
-    if (sliderIntervalPrice.isDefault) {
-      setSliderIntervalPrice({ min: resultPrice.min, max: resultPrice.max, isDefault: true });
+    if (price.isDefault) {
+      setPrice({ min: resultPrice.min, max: resultPrice.max, isDefault: true });
     }
-  }, [resultPrice.min, resultPrice.max, sliderIntervalPrice.isDefault]);
+  }, [resultPrice.min, resultPrice.max, price.isDefault]);
 
   useEffect(() => {
-    if (sliderIntervalStock.isDefault) {
-      setSliderIntervalStock({ min: resultStock.min, max: resultStock.max, isDefault: true });
+    if (stock.isDefault) {
+      setStock({ min: resultStock.min, max: resultStock.max, isDefault: true });
     }
-  }, [resultStock.min, resultStock.max, sliderIntervalStock.isDefault]);
+  }, [resultStock.min, resultStock.max, stock.isDefault]);
 
   return (
     <Container>
       <ProductFilter
         filter={filter}
         setFilter={setFilter}
-        price={sliderIntervalPrice}
-        stock={sliderIntervalStock}
-        setPrice={setSliderIntervalPrice}
-        setStock={setSliderIntervalStock}
+        price={price}
+        stock={stock}
+        setPrice={setPrice}
+        setStock={setStock}
       />
       <ProductList products={filteredProducts} />
     </Container>
