@@ -25,6 +25,7 @@ export interface IProductFilter {
   filter: IFilter;
   price: SliderChange;
   stock: SliderChange;
+  products: IProduct[];
   setFilter: (e: IFilter) => void;
   setStock: (model: SliderChange) => void;
   setPrice: (model: SliderChange) => void;

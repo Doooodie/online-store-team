@@ -3,6 +3,7 @@ import MySelect from '../../UI/select/MySelect';
 import { IProductFilter } from '../../types/types';
 import RangeSliderPrice from '../../UI/rangeSlider/MyRangeSliderPrice';
 import RangeSliderStock from '../../UI/rangeSlider/MyRangeSliderStock';
+import CheckboxLabels from './FilterCategory/FilterCheckbox';
 
 export default function ProductFilter({
   filter,
@@ -11,6 +12,7 @@ export default function ProductFilter({
   stock,
   setPrice,
   setStock,
+  products,
 }: IProductFilter) {
   return (
     <div>
@@ -34,6 +36,7 @@ export default function ProductFilter({
       />
       <RangeSliderPrice price={price} setPrice={setPrice} title='Price' step={5} />
       <RangeSliderStock stock={stock} setStock={setStock} title='Stock' step={1} />
+      <CheckboxLabels title='Category' products={products} />
     </div>
   );
 }

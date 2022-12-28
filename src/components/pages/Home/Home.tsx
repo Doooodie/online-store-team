@@ -52,6 +52,7 @@ function Home() {
         setFilter={setFilter}
         price={price}
         stock={stock}
+        products={filteredProducts}
         setPrice={setPrice}
         setStock={setStock}
       />
