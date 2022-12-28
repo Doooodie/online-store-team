@@ -36,7 +36,8 @@ export default function ProductFilter({
       />
       <RangeSliderPrice price={price} setPrice={setPrice} title='Price' step={5} />
       <RangeSliderStock stock={stock} setStock={setStock} title='Stock' step={1} />
-      <CheckboxLabels title='Category' products={products} />
+      <CheckboxLabels title='Category' products={products} filter='category' />
+      <CheckboxLabels title='Brand' products={products} filter='brand' />
     </div>
   );
 }

@@ -1,42 +1,37 @@
-/* eslint-disable */
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { IProduct } from '../../../types/types';
-import { Collection } from 'typescript';
 
 interface CheckboxLabelsProps {
   products: IProduct[];
   title: string;
+  filter: keyof IProduct;
 }
 
-interface IFilterItem {
-  category: string;
-  count: number;
-  all: number;
-}
+export default function CheckboxLabels({ products, title, filter }: CheckboxLabelsProps) {
+  const collection = new Map();
 
-export default function CheckboxLabels({ products }: CheckboxLabelsProps) {
+  products.map((product) => {
+    if (collection.has(product[filter])) {
+      const number = collection.get(product[filter]);
+      collection.set(product[filter], number + 1);
+    } else {
+      collection.set(product[filter], 1);
+    }
+    return undefined;
+  });
 
-const result = new Map();
-
-products.map((product) => {
-  if(result.has(product.category)) {
-    const number = result.get(product.category);
-    result.set(product.category, number+1);
-  } else {
-    result.set(product.category, 1);
-  }
-});
-
-{/* <h2>{title}</h2>
-      {categories.forEach((cat: IFilterItem) => (
-            <FormControlLabel control={<Checkbox />} label={cat.category} />
-          ))} */}
-
-  console.log(result);
+  const filterValueArray = Array.from(collection);
   return (
     <div>
-      
+      <h2>{title}</h2>
+      {filterValueArray.map((filterValue) => (
+        <FormControlLabel
+          control={<Checkbox />}
+          key={Math.random()}
+          label={`${filterValue[0]} ${filterValue[1]}`}
+        />
+      ))}
     </div>
   );
 }
