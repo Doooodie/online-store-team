@@ -1,25 +1,19 @@
-/* eslint-disable */ 
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { IFilter, SliderChange } from '../../types/types';
+import { SliderChange } from '../../types/types';
 
 interface SliderProps {
   title: string;
   step: number;
   stock: SliderChange;
-  setStock: (value: any) => void;
+  setStock: (value: SliderChange) => void;
 }
 function valuetext(value: number) {
   return `${value}°C`;
 }
 
-export default function RangeSliderStock({
-  title,
-  step,
-  stock,
-  setStock,
-}: SliderProps) {
-  const handleChange = (event: Event, newValue: number | number[]) => {
+export default function RangeSliderStock({ title, step, stock, setStock }: SliderProps) {
+  const handleChange = (_event: Event, newValue: number | number[]) => {
     const minValue: number = Math.min.apply(null, newValue as number[]);
     const maxValue: number = Math.max.apply(null, newValue as number[]);
     setStock({ min: minValue, max: maxValue, isDefault: false });
