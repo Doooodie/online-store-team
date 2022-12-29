@@ -1,6 +1,12 @@
 import { useMemo } from 'react';
 import { IProduct, ISelectedSort } from '../types/types';
 
+interface ISlider {
+  min: number;
+  max: number;
+  isDefault: boolean;
+}
+
 export function useSortedPost(products: IProduct[], sort: string) {
   const getSortedProducts = useMemo(() => {
     const sortValue = sort.split('-')[0] as keyof ISelectedSort;
@@ -32,8 +38,43 @@ export function useSearchProducts(products: IProduct[], query: string) {
   return searchProducts;
 }
 
-export function useFilterProducts(products: IProduct[], sort: string, query: string) {
+export function useSortByPrice(products: IProduct[], price: ISlider) {
+  const sortByPrice = useMemo(() => {
+    if (price.isDefault) {
+      return [...products];
+    }
+    return [...products].filter(
+      (product) => product.price >= price.min && product.price <= price.max,
+    );
+  }, [products, price.min, price.max, price.isDefault]);
+  return sortByPrice;
+}
+
+export function useSortByStock(products: IProduct[], stock: ISlider) {
+  const SortByStock = useMemo(() => {
+    if (stock.isDefault) {
+      return [...products];
+    }
+    return [...products].filter(
+      (product) => product.stock >= stock.min && product.stock <= stock.max,
+    );
+  }, [products, stock.min, stock.max, stock.isDefault]);
+  return SortByStock;
+}
+
+export function useFilterProducts(
+  products: IProduct[],
+  sort: string,
+  query: string,
+  price: ISlider,
+  stock: ISlider,
+) {
   const sortedProducts = useSortedPost(products, sort);
   const sortedAndSearchProducts = useSearchProducts(sortedProducts, query);
-  return sortedAndSearchProducts;
+  const sortedWithPriceAndSearchProduects = useSortByPrice(sortedAndSearchProducts, price);
+  const sortedWithPriceStockSearchProducts = useSortByStock(
+    sortedWithPriceAndSearchProduects,
+    stock,
+  );
+  return sortedWithPriceStockSearchProducts;
 }

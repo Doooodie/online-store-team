@@ -1,16 +1,25 @@
 import MyInput from '../../UI/input/MyInput';
 import MySelect from '../../UI/select/MySelect';
 import { IProductFilter } from '../../types/types';
+import RangeSliderPrice from '../../UI/rangeSlider/MyRangeSliderPrice';
+import RangeSliderStock from '../../UI/rangeSlider/MyRangeSliderStock';
+import CheckboxLabels from './FilterCategory/FilterCheckbox';
 
-export default function ProductFilter({ filter, setFilter }: IProductFilter) {
+export default function ProductFilter({
+  filter,
+  setFilter,
+  price,
+  stock,
+  setPrice,
+  setStock,
+  products,
+}: IProductFilter) {
   return (
     <div>
       <MyInput
         placeholder='Search...'
         value={filter.query}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setFilter({ ...filter, query: e.target.value })
-        }
+        onChange={(e) => setFilter({ ...filter, query: e.target.value })}
       />
       <MySelect
         defaultValue='Sort options...'
@@ -25,6 +34,10 @@ export default function ProductFilter({ filter, setFilter }: IProductFilter) {
         ]}
         onChange={(e) => setFilter({ ...filter, sort: e.target.value })}
       />
+      <RangeSliderPrice price={price} setPrice={setPrice} title='Price' step={5} />
+      <RangeSliderStock stock={stock} setStock={setStock} title='Stock' step={1} />
+      <CheckboxLabels title='Category' products={products} filter='category' />
+      <CheckboxLabels title='Brand' products={products} filter='brand' />
     </div>
   );
 }
