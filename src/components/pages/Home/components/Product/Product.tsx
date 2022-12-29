@@ -18,7 +18,7 @@ export default function Product({ product }: ProductProps) {
         </ul>
 
         <div className={styles.buttonsContainer}>
-          <AddToCartButton id={product.id} price={product.price} />
+          <AddToCartButton id={product.id} price={product.price} className='product-card-button' />
           <ShowProductDetails id={product.id} />
         </div>
       </div>

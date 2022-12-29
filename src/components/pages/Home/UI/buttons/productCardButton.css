@@ -1,6 +1,6 @@
 .product-card-button {
   padding: 0.5rem;
-  color: white;
+  color: var(--white);
   background-color: var(--medium-brown);
   border: 0;
   border-radius: 5px;

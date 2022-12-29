@@ -16,6 +16,10 @@
   background-color: var(--medium-white);
 }
 
+.main {
+  background: var(--white);
+}
+
 .layout-links {
   margin: 0;
   padding: 0;
