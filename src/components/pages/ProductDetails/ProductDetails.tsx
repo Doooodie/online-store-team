@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import productsData from '../../../assets/json/products.json';
+import DetailsPhotos from './components/DetailsPhotos/DetailsPhotos';
 import DetailsInfo from './components/DetailsInfo/DetailsInfo';
 import AddToCartButton from '../Home/UI/buttons/AddToCartButton';
 
@@ -40,16 +41,7 @@ function ProductDetails() {
           </div>
           <hr className='details-separator' />
           <div className='details-bottom'>
-            <div className='details-photos'>
-              <div className='photos-main'>
-                <img src={product.images[1]} alt='product' className='main-photo' />
-              </div>
-              <div className='photos-aside'>
-                <img src={product.images[1]} alt='product' className='aside-photo' />
-                <img src={product.images[2]} alt='product' className='aside-photo' />
-                <img src={product.images[3]} alt='product' className='aside-photo' />
-              </div>
-            </div>
+            <DetailsPhotos images={product.images} />
 
             <div className='details-info'>
               <DetailsInfo heading='Description' details={product.description} />
