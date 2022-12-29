@@ -1,23 +1,22 @@
 import React from 'react';
-import styles from './MyButton.module.css';
 import { useAppDispatch } from '../../../../hooks';
 import { addToCart } from '../../../../store/cartSlice';
+import './productCardButton.css';
 
-interface MyButtonProps {
-  name: string;
+interface AddToCartButtonProps {
   id: number;
   price: number;
 }
 
-const MyButton: React.FC<MyButtonProps> = function MyButton({ name, id, price }) {
+const AddToCartButton: React.FC<AddToCartButtonProps> = function AddToCartButton({ id, price }) {
   const dispatch = useAppDispatch();
   const addTask = () => dispatch(addToCart({ id, price }));
 
   return (
-    <button type='button' className={styles.button} onClick={addTask}>
-      {name}
+    <button type='button' className='product-card-button' onClick={addTask}>
+      Add to cart
     </button>
   );
 };
 
-export default MyButton;
+export default AddToCartButton;

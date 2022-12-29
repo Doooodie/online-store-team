@@ -8,6 +8,7 @@ import './App.css';
 import Layout from './pages/Layout/Layout';
 import NoPage from './pages/NoPage/NoPage';
 import Home from './pages/Home/Home';
+import ProductDetails from './pages/ProductDetails/ProductDetails';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Layout />}>
               <Route index element={<Home />} />
+              <Route path='product-details/:id' element={<ProductDetails />} />
               <Route path='*' element={<NoPage />} />
             </Route>
           </Routes>
