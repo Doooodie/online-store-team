@@ -22,6 +22,10 @@ export default function CheckboxLabels({ products, title, filter }: CheckboxLabe
   });
 
   const filterValueArray = Array.from(collection);
+
+  const handleChange = (data: string) => {
+    console.log(data);
+  };
   return (
     <div>
       <h2>{title}</h2>
@@ -30,6 +34,7 @@ export default function CheckboxLabels({ products, title, filter }: CheckboxLabe
           control={<Checkbox />}
           key={Math.random()}
           label={`${filterValue[0]} ${filterValue[1]}`}
+          onChange={() => handleChange(filterValue[0])}
         />
       ))}
     </div>
