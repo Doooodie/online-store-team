@@ -1,7 +1,12 @@
+import { useAppSelector } from '../../../../../../hooks';
+
 function CartItems() {
+  const products = useAppSelector((state) => state.cart.products);
+  const itemsCount = products.length;
+
   return (
     <span>
-      Cart items: <strong>0</strong>
+      Cart items: <strong>{itemsCount}</strong>
     </span>
   );
 }

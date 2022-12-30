@@ -1,0 +1,9 @@
+.main {
+  background: var(--light-brown);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.no-page-header {
+  text-align: center;
+}
