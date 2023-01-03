@@ -11,14 +11,14 @@ export default function ProductList({ products }: ProductListProps) {
   }
   if (products !== undefined) {
     return (
-      <div className={styles.productListWrapper}>
+      <main className={styles.productListWrapper}>
         <h3>Found: {products.length}</h3>
         <div className={styles.productList}>
           {products.map((item) => (
             <Product product={item} key={item.id} />
           ))}
         </div>
-      </div>
+      </main>
     );
   }
   return <h1>Posts not find</h1>;

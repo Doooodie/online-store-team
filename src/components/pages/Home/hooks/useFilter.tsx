@@ -62,14 +62,54 @@ export function useSortByStock(products: IProduct[], stock: ISlider) {
   return SortByStock;
 }
 
+export function useFilterByBrand(product: IProduct[], brandNames: string[]) {
+  const filteredByBrand = useMemo(() => {
+    if (!brandNames.length) {
+      return product;
+    }
+    const result: IProduct[] = [];
+    for (let i = 0; i < brandNames.length; i += 1) {
+      for (let j = 0; j < product.length; j += 1) {
+        if (product[j].brand.toLowerCase() === brandNames[i].toLowerCase()) {
+          result.push(product[j]);
+        }
+      }
+    }
+    return result;
+  }, [product, brandNames]);
+  return filteredByBrand;
+}
+
+export function useFilterByCategory(product: IProduct[], categoryNames: string[]) {
+  const filteredByCategory = useMemo(() => {
+    if (!categoryNames.length) {
+      return product;
+    }
+    const result: IProduct[] = [];
+    for (let i = 0; i < categoryNames.length; i += 1) {
+      for (let j = 0; j < product.length; j += 1) {
+        if (product[j].category.toLowerCase() === categoryNames[i].toLowerCase()) {
+          result.push(product[j]);
+        }
+      }
+    }
+    return result;
+  }, [product, categoryNames]);
+  return filteredByCategory;
+}
+
 export function useFilterProducts(
   products: IProduct[],
   sort: string,
   query: string,
   price: ISlider,
   stock: ISlider,
+  category: string[],
+  brand: string[],
 ) {
-  const sortedProducts = useSortedPost(products, sort);
+  const filteredByCategory = useFilterByCategory(products, category);
+  const filteredByBrand = useFilterByBrand(filteredByCategory, brand);
+  const sortedProducts = useSortedPost(filteredByBrand, sort);
   const sortedAndSearchProducts = useSearchProducts(sortedProducts, query);
   const sortedWithPriceAndSearchProduects = useSortByPrice(sortedAndSearchProducts, price);
   const sortedWithPriceStockSearchProducts = useSortByStock(

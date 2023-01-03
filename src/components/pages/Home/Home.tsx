@@ -14,6 +14,8 @@ function Home() {
   const [filter, setFilter] = useState<IFilter>({
     sort: 'default',
     query: '',
+    category: [],
+    brand: [],
   });
 
   const [price, setPrice] = useState({
@@ -28,7 +30,18 @@ function Home() {
     isDefault: true,
   });
 
-  const filteredProducts = useFilterProducts(products, filter.sort, filter.query, price, stock);
+  const [category, setCategory] = useState<Array<string>>([]);
+  const [brand, setBrand] = useState<Array<string>>([]);
+
+  const filteredProducts = useFilterProducts(
+    products,
+    filter.sort,
+    filter.query,
+    price,
+    stock,
+    category,
+    brand,
+  );
 
   const resultPrice = findInterval(filteredProducts, KeysOfProduct.price);
   const resultStock = findInterval(filteredProducts, KeysOfProduct.stock);
@@ -52,9 +65,13 @@ function Home() {
         setFilter={setFilter}
         price={price}
         stock={stock}
-        products={productsArray}
+        products={filteredProducts}
         setPrice={setPrice}
         setStock={setStock}
+        category={category}
+        setCategory={setCategory}
+        brand={brand}
+        setBrand={setBrand}
       />
       <ProductList products={filteredProducts} />
     </Container>

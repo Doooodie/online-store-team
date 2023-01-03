@@ -3,7 +3,10 @@ import MySelect from '../../UI/select/MySelect';
 import { IProductFilter } from '../../types/types';
 import RangeSliderPrice from '../../UI/rangeSlider/MyRangeSliderPrice';
 import RangeSliderStock from '../../UI/rangeSlider/MyRangeSliderStock';
-import CheckboxLabels from './FilterCategory/FilterCheckbox';
+import FilterSelectList from '../FilterSelectList/FilterSelectList';
+import dataProducts from '../../../../../assets/json/products.json';
+import { getListFilterNames } from '../../functions/functions';
+import styles from './ProductFilter.module.css';
 
 export default function ProductFilter({
   filter,
@@ -13,9 +16,15 @@ export default function ProductFilter({
   setPrice,
   setStock,
   products,
+  category,
+  setCategory,
+  brand,
+  setBrand,
 }: IProductFilter) {
+  const categories = getListFilterNames('category', dataProducts.products);
+  const brandes = getListFilterNames('brand', dataProducts.products);
   return (
-    <div>
+    <aside className={styles.productFilter}>
       <MyInput
         placeholder='Search...'
         value={filter.query}
@@ -36,8 +45,20 @@ export default function ProductFilter({
       />
       <RangeSliderPrice price={price} setPrice={setPrice} title='Price' step={5} />
       <RangeSliderStock stock={stock} setStock={setStock} title='Stock' step={1} />
-      <CheckboxLabels title='Category' products={products} filter='category' />
-      <CheckboxLabels title='Brand' products={products} filter='brand' />
-    </div>
+      <FilterSelectList
+        products={products}
+        filterNames={categories}
+        filterName='Category'
+        keys={category}
+        setKeys={setCategory}
+      />
+      <FilterSelectList
+        products={products}
+        filterNames={brandes}
+        filterName='Brand'
+        keys={brand}
+        setKeys={setBrand}
+      />
+    </aside>
   );
 }
