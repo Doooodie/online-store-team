@@ -1,5 +1,4 @@
 import { Checkbox, FormControlLabel } from '@mui/material';
-import { useState } from 'react';
 import { IFilterSelectListProps, ICheckBox, IProduct } from '../../types/types';
 import styles from './FilterSelectList.module.css';
 
@@ -9,6 +8,8 @@ export default function FilterSelectList({
   filterName,
   keys,
   setKeys,
+  checkBoxList,
+  setCheckBoxList,
 }: IFilterSelectListProps) {
   function convertStringToObject(array: [string, number][]) {
     const result: ICheckBox[] = [];
@@ -29,9 +30,7 @@ export default function FilterSelectList({
     });
     return result;
   }
-
   const filterNamesObject = convertStringToObject(filterNames);
-  const [checkBoxList, setCheckBoxList] = useState(filterNamesObject);
 
   function handleChange(id: number) {
     const newCheckBoxList = [...checkBoxList];

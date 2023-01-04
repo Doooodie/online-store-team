@@ -14,8 +14,6 @@ function Home() {
   const [filter, setFilter] = useState<IFilter>({
     sort: 'default',
     query: '',
-    category: [],
-    brand: [],
   });
 
   const [price, setPrice] = useState({

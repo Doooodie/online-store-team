@@ -71,8 +71,6 @@ export interface ProductProps {
 export interface IFilter {
   sort: string;
   query: string;
-  category: string[];
-  brand: string[];
 }
 
 export enum KeysOfProduct {
@@ -86,6 +84,8 @@ export interface IFilterSelectListProps {
   filterName: string;
   keys: string[];
   setKeys: (model: string[]) => void;
+  checkBoxList: ICheckBox[];
+  setCheckBoxList: (model: ICheckBox[]) => void;
 }
 
 export interface ICheckBox {
