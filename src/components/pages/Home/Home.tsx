@@ -32,6 +32,7 @@ function Home() {
 
   const [category, setCategory] = useState<Array<string>>([]);
   const [brand, setBrand] = useState<Array<string>>([]);
+  const [big, setBig] = useState<boolean | undefined>(undefined);
 
   const filteredProducts = useFilterProducts(
     products,
@@ -73,7 +74,7 @@ function Home() {
         brand={brand}
         setBrand={setBrand}
       />
-      <ProductList products={filteredProducts} />
+      <ProductList big={big} setBig={setBig} products={filteredProducts} />
     </Container>
   );
 }

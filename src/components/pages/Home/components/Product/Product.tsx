@@ -1,13 +1,12 @@
 import MyButton from '../../UI/button/MyButton';
-import styles from './Product.module.css';
 import { ProductProps } from '../../types/types';
 
 export default function Product({ product }: ProductProps) {
   return (
-    <div className={styles.product}>
+    <div className='product'>
       <h3>{product.title}</h3>
       <div>
-        <ul>
+        <ul className='productValues'>
           <li>Category: {product.category}</li>
           <li>Brand: {product.brand}</li>
           <li>Price: {product.price}</li>
