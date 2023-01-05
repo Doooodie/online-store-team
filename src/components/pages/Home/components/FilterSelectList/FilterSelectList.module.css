@@ -1,16 +1,12 @@
-.filterSelectList {
-    width: auto;
-    max-height: 25vh;
-    border-radius: 10px;
-    margin: 20px 0;
-    border: 1px solid black;
-    padding: 0 25px;
-    overflow-y: scroll;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-* {
-    list-style: none;
+.filter-select-list {
+  width: auto;
+  max-height: 25vh;
+  border-radius: 10px;
+  margin: 20px 0;
+  border: 1px solid black;
+  padding: 0 25px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }

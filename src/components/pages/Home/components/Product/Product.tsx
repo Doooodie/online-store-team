@@ -6,7 +6,7 @@ export default function Product({ product }: ProductProps) {
     <div className='product'>
       <h3>{product.title}</h3>
       <div>
-        <ul className='productValues'>
+        <ul className='product-values'>
           <li>Category: {product.category}</li>
           <li>Brand: {product.brand}</li>
           <li>Price: {product.price}</li>

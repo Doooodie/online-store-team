@@ -16,10 +16,10 @@ export default function ProductList({ products, big, setBig }: ProductListProps)
   }
   if (products !== undefined) {
     return (
-      <main className='productListWrapper'>
+      <main className='product-list-wrapper'>
         <ToggleButtons setBig={setBig} />
         <h3>Found: {products.length}</h3>
-        <div className={`productList ${isBig ? '' : 'productListSmall'}`}>
+        <div className={`product-list ${isBig ? '' : 'product-list-small'}`}>
           {products.map((item) => (
             <Product product={item} key={item.id} />
           ))}

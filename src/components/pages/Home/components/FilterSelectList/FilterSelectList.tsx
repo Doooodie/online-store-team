@@ -61,7 +61,7 @@ export default function FilterSelectList({
   return (
     <section>
       <h2>{filterName}</h2>
-      <div className={styles.filterSelectList}>
+      <div className={styles['filter-select-list']}>
         {filterNamesObject.map((name) => renderCheckBox(name))}
       </div>
     </section>

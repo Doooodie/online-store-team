@@ -8,9 +8,9 @@ interface MyInputProps {
 
 export default function MyInput({ placeholder, value, onChange }: MyInputProps) {
   return (
-    <div className={styles.floatingLabel}>
+    <div className={styles['floating-label']}>
       <input
-        className={styles.floatingLabelInput}
+        className={styles['floating-label-input']}
         placeholder={placeholder}
         value={value}
         onChange={onChange}

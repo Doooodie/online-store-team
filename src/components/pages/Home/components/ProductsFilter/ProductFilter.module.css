@@ -1,7 +1,7 @@
-.productFilter {
-    width: 30%;
-    padding: 5px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.product-filter {
+  width: 30%;
+  padding: 5px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

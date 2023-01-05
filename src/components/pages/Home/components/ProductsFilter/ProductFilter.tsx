@@ -74,7 +74,7 @@ export default function ProductFilter({
   }
 
   return (
-    <aside className={styles.productFilter}>
+    <aside className={styles['product-filter']}>
       <Button
         onClick={() => resetFilters()}
         size='small'
