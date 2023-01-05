@@ -11,7 +11,7 @@ interface IToggleButtonsProps {
 export default function ToggleButtons({ setBig }: IToggleButtonsProps) {
   const [alignment, setAlignment] = useState<string | null>('right');
 
-  const handleAlignment = (event: React.MouseEvent<HTMLElement>, newAlignment: string | null) => {
+  const handleAlignment = (_event: React.MouseEvent<HTMLElement>, newAlignment: string | null) => {
     const isBig = newAlignment === 'right';
     setBig(isBig);
     setAlignment(newAlignment);
