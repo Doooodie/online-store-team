@@ -6,7 +6,7 @@ function CartTotal() {
 
   return (
     <span>
-      Cart total: <strong>{price}</strong>
+      Cart total: <strong>€{price}</strong>
     </span>
   );
 }

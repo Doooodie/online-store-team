@@ -6,7 +6,11 @@
     border-radius: 16px;
 }
 
-* {
+.product ul > li {
     list-style: none;
 }
 
+.buttonsContainer {
+    display: flex;
+    justify-content: space-between;
+}
