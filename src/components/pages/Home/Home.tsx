@@ -5,7 +5,6 @@ import ProductFilter from './components/ProductsFilter/ProductFilter';
 import { IFilter, KeysOfProduct } from './types/types';
 import { useFilterProducts } from './hooks/useFilter';
 import dataProducts from '../../../assets/json/products.json';
-import './Home.css';
 import findInterval from './functions/functions';
 
 function Home() {
