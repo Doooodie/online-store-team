@@ -1,16 +1,16 @@
 .product {
-    width: 100%;
-    height: 100%;
-    border: 1px solid black;
-    padding: 10px 25px;
-    border-radius: 16px;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  padding: 10px 25px;
+  border-radius: 16px;
 }
 
 .product ul > li {
-    list-style: none;
+  list-style: none;
 }
 
-.buttonsContainer {
-    display: flex;
-    justify-content: space-between;
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
 }
