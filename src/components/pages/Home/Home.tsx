@@ -5,7 +5,6 @@ import ProductFilter from './components/ProductsFilter/ProductFilter';
 import { IFilter, KeysOfProduct } from './types/types';
 import { useFilterProducts } from './hooks/useFilter';
 import dataProducts from '../../../assets/json/products.json';
-import './Home.css';
 import findInterval from './functions/functions';
 
 function Home() {
@@ -28,7 +27,19 @@ function Home() {
     isDefault: true,
   });
 
-  const filteredProducts = useFilterProducts(products, filter.sort, filter.query, price, stock);
+  const [category, setCategory] = useState<Array<string>>([]);
+  const [brand, setBrand] = useState<Array<string>>([]);
+  const [big, setBig] = useState<boolean | undefined>(undefined);
+
+  const filteredProducts = useFilterProducts(
+    products,
+    filter.sort,
+    filter.query,
+    price,
+    stock,
+    category,
+    brand,
+  );
 
   const resultPrice = findInterval(filteredProducts, KeysOfProduct.price);
   const resultStock = findInterval(filteredProducts, KeysOfProduct.stock);
@@ -55,8 +66,12 @@ function Home() {
         products={filteredProducts}
         setPrice={setPrice}
         setStock={setStock}
+        category={category}
+        setCategory={setCategory}
+        brand={brand}
+        setBrand={setBrand}
       />
-      <ProductList products={filteredProducts} />
+      <ProductList big={big} setBig={setBig} products={filteredProducts} />
     </Container>
   );
 }

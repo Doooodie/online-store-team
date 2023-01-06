@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.1",
     "@mui/styled-engine-sc": "^5.11.0",
     "@reduxjs/toolkit": "^1.9.1",
@@ -40,11 +41,12 @@
     "prettier": "^2.8.1",
     "stylelint": "^14.16.1",
     "stylelint-config-prettier": "^9.0.4",
-    "stylelint-config-standard": "^29.0.0"
+    "stylelint-config-standard": "^29.0.0",
+    "stylelint-prettier": "^2.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "npm test && react-scripts build",
     "test": "npm run test:lint:js && npm run test:lint:css && npm run test:unit",
     "test:unit": "react-scripts test",
     "test:lint:js": "eslint --ignore-path .gitignore .",

@@ -1,26 +1,17 @@
-.floatingLabel {
-    border: 1px solid #d1d5db;
-    border-radius: 0.25rem;
-    position: relative;
+.floating-label {
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  position: relative;
 }
 
-.floatingLabelInput {
-    border: none;
-    padding: 0.5rem;
-    height: 100%;
+.floating-label-input {
+  border: none;
+  padding: 0.5rem;
+  height: 100%;
 }
 
-.floatingLabelInput:not(:placeholder-shown) + .floatingLabelLabel {
-    background: #fff;
-    transform: translate(0, -200%);
-    opacity: 1;
-}
-
-.floatingLabelLabel {
-    left: 1rem;
-    position: absolute;
-    top: 100%;
-    opacity: 0;
-    transition: all 200ms;
-    padding: 0 0.5rem;
+.floating-label-input:not(:placeholder-shown) + .floating-label-label {
+  background: #fff;
+  transform: translate(0, -200%);
+  opacity: 1;
 }

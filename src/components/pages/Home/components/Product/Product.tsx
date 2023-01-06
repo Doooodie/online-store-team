@@ -5,10 +5,10 @@ import { ProductProps } from '../../types/types';
 
 export default function Product({ product }: ProductProps) {
   return (
-    <div className={styles.product}>
+    <div className='product'>
       <h3>{product.title}</h3>
       <div>
-        <ul>
+        <ul className='product-values'>
           <li>Category: {product.category}</li>
           <li>Brand: {product.brand}</li>
           <li>Price: {product.price}</li>
