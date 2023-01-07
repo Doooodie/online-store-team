@@ -26,7 +26,6 @@ export default function ProductFilter({
   brand,
   setBrand,
   setSearchParams,
-  searchParams,
 }: IProductFilter) {
   const categories = getListFilterNames('category', dataProducts.products);
   const brandes = getListFilterNames('brand', dataProducts.products);
@@ -95,7 +94,6 @@ export default function ProductFilter({
         ]}
         onChange={(e) => {
           const currentSort = e.target.value;
-          console.log(e.target.value);
           setSort(currentSort);
           settingParams();
         }}

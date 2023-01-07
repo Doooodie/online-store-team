@@ -35,8 +35,7 @@ export interface IProductFilter {
   setCategory: (model: string[]) => void;
   brand: string[];
   setBrand: (model: string[]) => void;
-  setSearchParams: (value: any) => void;
-  searchParams: URLSearchParams;
+  setSearchParams: (params: any) => void;
 }
 
 export type SliderChange = {

@@ -18,7 +18,7 @@ function Home() {
 
   const [price, setPrice] = useState({
     min: 0,
-    max: 1499,
+    max: 1750,
     isDefault: true,
   });
 
@@ -66,7 +66,6 @@ function Home() {
         brand={brand}
         setBrand={setBrand}
         setSearchParams={setSearchParams}
-        searchParams={searchParams}
       />
       <ProductList big={big} setBig={setBig} products={filteredProducts} />
     </Container>
