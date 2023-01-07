@@ -1,4 +1,4 @@
-import { IProduct, KeysOfProduct } from '../types/types';
+import { IProduct, KeysOfProduct, ICheckBox } from '../types/types';
 
 export default function findInterval(
   productsArr: IProduct[],
@@ -23,4 +23,28 @@ export function getListFilterNames(filterQuery: keyof IProduct, products: IProdu
     return undefined;
   });
   return Array.from(collection);
+}
+
+export function convertStringToObject(
+  array: [string, number][],
+  filterName: string,
+  products: IProduct[],
+) {
+  const result: ICheckBox[] = [];
+  array.map((name, index) => {
+    let count = 0;
+    products.map((product) => {
+      if (product[filterName.toLowerCase() as keyof IProduct] === name[0]) count += 1;
+      return undefined;
+    });
+    result.push({
+      id: index,
+      name: name[0],
+      checked: false,
+      count,
+      maxCount: name[1],
+    });
+    return undefined;
+  });
+  return result;
 }

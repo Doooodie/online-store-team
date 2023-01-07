@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import ProductList from './components/ProductList/ProductList';
 import Container from './components/Container/Container';
 import ProductFilter from './components/ProductsFilter/ProductFilter';
-import { IFilter, KeysOfProduct } from './types/types';
+import { KeysOfProduct } from './types/types';
 import { useFilterProducts } from './hooks/useFilter';
 import dataProducts from '../../../assets/json/products.json';
 import findInterval from './functions/functions';
@@ -10,10 +11,10 @@ import findInterval from './functions/functions';
 function Home() {
   const productsArray = dataProducts.products;
   const [products] = useState(productsArray);
-  const [filter, setFilter] = useState<IFilter>({
-    sort: 'default',
-    query: '',
-  });
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get('query'));
+  const [sort, setSort] = useState(searchParams.get('sort'));
 
   const [price, setPrice] = useState({
     min: 0,
@@ -31,15 +32,7 @@ function Home() {
   const [brand, setBrand] = useState<Array<string>>([]);
   const [big, setBig] = useState<boolean | undefined>(undefined);
 
-  const filteredProducts = useFilterProducts(
-    products,
-    filter.sort,
-    filter.query,
-    price,
-    stock,
-    category,
-    brand,
-  );
+  const filteredProducts = useFilterProducts(products, sort, query, price, stock, category, brand);
 
   const resultPrice = findInterval(filteredProducts, KeysOfProduct.price);
   const resultStock = findInterval(filteredProducts, KeysOfProduct.stock);
@@ -59,8 +52,10 @@ function Home() {
   return (
     <Container>
       <ProductFilter
-        filter={filter}
-        setFilter={setFilter}
+        query={query}
+        setQuery={setQuery}
+        sort={sort}
+        setSort={setSort}
         price={price}
         stock={stock}
         products={filteredProducts}
@@ -70,6 +65,8 @@ function Home() {
         setCategory={setCategory}
         brand={brand}
         setBrand={setBrand}
+        setSearchParams={setSearchParams}
+        searchParams={searchParams}
       />
       <ProductList big={big} setBig={setBig} products={filteredProducts} />
     </Container>

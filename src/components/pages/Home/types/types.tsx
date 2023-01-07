@@ -22,17 +22,21 @@ export interface IProduct {
 }
 
 export interface IProductFilter {
-  filter: IFilter;
+  query: string | null;
+  sort: string | null;
+  setQuery: (value: string | null) => void;
+  setSort: (value: string) => void;
   price: SliderChange;
   stock: SliderChange;
   products: IProduct[];
-  setFilter: (e: IFilter) => void;
   setStock: (model: SliderChange) => void;
   setPrice: (model: SliderChange) => void;
   category: string[];
   setCategory: (model: string[]) => void;
   brand: string[];
   setBrand: (model: string[]) => void;
+  setSearchParams: (value: any) => void;
+  searchParams: URLSearchParams;
 }
 
 export type SliderChange = {
@@ -94,4 +98,9 @@ export interface ICheckBox {
   checked: boolean;
   count: number;
   maxCount: number;
+}
+
+export interface IParams {
+  query?: string;
+  sort?: string;
 }

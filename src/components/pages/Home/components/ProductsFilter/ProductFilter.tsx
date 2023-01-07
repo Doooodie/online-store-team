@@ -3,17 +3,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useState } from 'react';
 import MyInput from '../../UI/input/MyInput';
 import MySelect from '../../UI/select/MySelect';
-import { ICheckBox, IProductFilter, IProduct } from '../../types/types';
+import { ICheckBox, IProductFilter, IParams } from '../../types/types';
 import RangeSliderPrice from '../../UI/rangeSlider/MyRangeSliderPrice';
 import RangeSliderStock from '../../UI/rangeSlider/MyRangeSliderStock';
 import FilterSelectList from '../FilterSelectList/FilterSelectList';
 import dataProducts from '../../../../../assets/json/products.json';
-import { getListFilterNames } from '../../functions/functions';
+import { getListFilterNames, convertStringToObject } from '../../functions/functions';
 import styles from './ProductFilter.module.css';
 
 export default function ProductFilter({
-  filter,
-  setFilter,
+  query,
+  setQuery,
+  sort,
+  setSort,
   price,
   stock,
   setPrice,
@@ -23,30 +25,13 @@ export default function ProductFilter({
   setCategory,
   brand,
   setBrand,
+  setSearchParams,
+  searchParams,
 }: IProductFilter) {
-  function convertStringToObject(array: [string, number][], filterName: string) {
-    const result: ICheckBox[] = [];
-    array.map((name, index) => {
-      let count = 0;
-      products.map((product) => {
-        if (product[filterName.toLowerCase() as keyof IProduct] === name[0]) count += 1;
-        return undefined;
-      });
-      result.push({
-        id: index,
-        name: name[0],
-        checked: false,
-        count,
-        maxCount: name[1],
-      });
-      return undefined;
-    });
-    return result;
-  }
   const categories = getListFilterNames('category', dataProducts.products);
   const brandes = getListFilterNames('brand', dataProducts.products);
-  const filterNamesCategory = convertStringToObject(categories, 'category');
-  const filterNamesBrand = convertStringToObject(brandes, 'brand');
+  const filterNamesCategory = convertStringToObject(categories, 'category', products);
+  const filterNamesBrand = convertStringToObject(brandes, 'brand', products);
   const [boxListCategory, setBoxListCategory] = useState<Array<ICheckBox>>(filterNamesCategory);
   const [boxListBrand, setBoxListBrand] = useState<Array<ICheckBox>>(filterNamesBrand);
 
@@ -61,16 +46,21 @@ export default function ProductFilter({
       max: 150,
       isDefault: true,
     });
-
-    setFilter({
-      sort: 'default',
-      query: '',
-    });
+    setQuery(null);
+    setSort('default');
     setCategory([]);
     setBrand([]);
 
     setBoxListCategory(filterNamesCategory);
     setBoxListBrand(filterNamesBrand);
+    setSearchParams({});
+  }
+
+  function settingParams() {
+    const params: IParams = {};
+    if (query?.length) params.query = query;
+    if (sort?.length) params.sort = sort;
+    setSearchParams(params);
   }
 
   return (
@@ -85,12 +75,16 @@ export default function ProductFilter({
       </Button>
       <MyInput
         placeholder='Search...'
-        value={filter.query}
-        onChange={(e) => setFilter({ ...filter, query: e.target.value })}
+        value={query || ''}
+        onChange={(e) => {
+          const currentQuery = e.target.value;
+          setQuery(currentQuery);
+          settingParams();
+        }}
       />
       <MySelect
         defaultValue='Sort options...'
-        value={filter.sort}
+        value={sort || 'default'}
         options={[
           { value: 'price-ASC', name: 'Sort by price ASC' },
           { value: 'price-DESC', name: 'Sort by price DESC' },
@@ -99,7 +93,12 @@ export default function ProductFilter({
           { value: 'discount-ASC', name: 'Sort by discount ASC' },
           { value: 'discount-DESC', name: 'Sort by discount DESC' },
         ]}
-        onChange={(e) => setFilter({ ...filter, sort: e.target.value })}
+        onChange={(e) => {
+          const currentSort = e.target.value;
+          console.log(e.target.value);
+          setSort(currentSort);
+          settingParams();
+        }}
       />
       <RangeSliderPrice price={price} setPrice={setPrice} title='Price' step={5} />
       <RangeSliderStock stock={stock} setStock={setStock} title='Stock' step={1} />

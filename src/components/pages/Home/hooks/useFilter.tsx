@@ -7,8 +7,9 @@ interface ISlider {
   isDefault: boolean;
 }
 
-export function useSortedPost(products: IProduct[], sort: string) {
+export function useSortedPost(products: IProduct[], sort: string | null) {
   const getSortedProducts = useMemo(() => {
+    if (sort === null) return [...products];
     const sortValue = sort.split('-')[0] as keyof ISelectedSort;
     const reverse = sort.split('-')[1];
     if (sortValue === 'default') return [...products];
@@ -18,7 +19,7 @@ export function useSortedPost(products: IProduct[], sort: string) {
   return getSortedProducts;
 }
 
-export function useSearchProducts(products: IProduct[], query: string) {
+export function useSearchProducts(products: IProduct[], query: string | null) {
   const searchProducts = useMemo(() => {
     if (query) {
       return [...products].filter(
@@ -100,8 +101,8 @@ export function useFilterByCategory(product: IProduct[], categoryNames: string[]
 
 export function useFilterProducts(
   products: IProduct[],
-  sort: string,
-  query: string,
+  sort: string | null,
+  query: string | null,
   price: ISlider,
   stock: ISlider,
   category: string[],
