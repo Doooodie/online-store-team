@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
 import ProductList from './components/ProductList/ProductList';
 import Container from './components/Container/Container';
 import ProductFilter from './components/ProductsFilter/ProductFilter';
@@ -9,12 +10,20 @@ import dataProducts from '../../../assets/json/products.json';
 import findInterval from './functions/functions';
 
 function Home() {
+  const filter = useAppSelector((state) => state.filter);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('query') || '';
+  const sort = searchParams.get('sort') || 'default';
+
+  useEffect(() => {
+    const params: any = {};
+    if (filter.query.length) params.query = filter.query;
+    if (filter.sort !== 'default') params.sort = filter.sort;
+    setSearchParams(params);
+  }, [filter, setSearchParams]);
+
   const productsArray = dataProducts.products;
   const [products] = useState(productsArray);
-
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [query, setQuery] = useState(searchParams.get('query'));
-  const [sort, setSort] = useState(searchParams.get('sort'));
 
   const [price, setPrice] = useState({
     min: 0,
@@ -52,10 +61,6 @@ function Home() {
   return (
     <Container>
       <ProductFilter
-        query={query}
-        setQuery={setQuery}
-        sort={sort}
-        setSort={setSort}
         price={price}
         stock={stock}
         products={filteredProducts}
@@ -65,7 +70,6 @@ function Home() {
         setCategory={setCategory}
         brand={brand}
         setBrand={setBrand}
-        setSearchParams={setSearchParams}
       />
       <ProductList big={big} setBig={setBig} products={filteredProducts} />
     </Container>

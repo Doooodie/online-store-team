@@ -1,5 +1,3 @@
-import { ChangeEvent } from 'react';
-
 export interface ISelectedSort {
   price: string;
   discountPercentage: string;
@@ -22,10 +20,6 @@ export interface IProduct {
 }
 
 export interface IProductFilter {
-  query: string | null;
-  sort: string | null;
-  setQuery: (value: string | null) => void;
-  setSort: (value: string) => void;
   price: SliderChange;
   stock: SliderChange;
   products: IProduct[];
@@ -35,7 +29,6 @@ export interface IProductFilter {
   setCategory: (model: string[]) => void;
   brand: string[];
   setBrand: (model: string[]) => void;
-  setSearchParams: (params: any) => void;
 }
 
 export type SliderChange = {
@@ -46,9 +39,7 @@ export type SliderChange = {
 
 export interface MySelectProps {
   defaultValue: string;
-  value: string;
   options: IOptions[];
-  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export interface IOptions {

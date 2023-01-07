@@ -3,7 +3,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useState } from 'react';
 import MyInput from '../../UI/input/MyInput';
 import MySelect from '../../UI/select/MySelect';
-import { ICheckBox, IProductFilter, IParams } from '../../types/types';
+import { ICheckBox, IProductFilter } from '../../types/types';
 import RangeSliderPrice from '../../UI/rangeSlider/MyRangeSliderPrice';
 import RangeSliderStock from '../../UI/rangeSlider/MyRangeSliderStock';
 import FilterSelectList from '../FilterSelectList/FilterSelectList';
@@ -12,10 +12,6 @@ import { getListFilterNames, convertStringToObject } from '../../functions/funct
 import styles from './ProductFilter.module.css';
 
 export default function ProductFilter({
-  query,
-  setQuery,
-  sort,
-  setSort,
   price,
   stock,
   setPrice,
@@ -25,7 +21,6 @@ export default function ProductFilter({
   setCategory,
   brand,
   setBrand,
-  setSearchParams,
 }: IProductFilter) {
   const categories = getListFilterNames('category', dataProducts.products);
   const brandes = getListFilterNames('brand', dataProducts.products);
@@ -45,21 +40,11 @@ export default function ProductFilter({
       max: 150,
       isDefault: true,
     });
-    setQuery(null);
-    setSort('default');
     setCategory([]);
     setBrand([]);
 
     setBoxListCategory(filterNamesCategory);
     setBoxListBrand(filterNamesBrand);
-    setSearchParams({});
-  }
-
-  function settingParams() {
-    const params: IParams = {};
-    if (query?.length) params.query = query;
-    if (sort?.length) params.sort = sort;
-    setSearchParams(params);
   }
 
   return (
@@ -72,18 +57,9 @@ export default function ProductFilter({
       >
         Reset Filters
       </Button>
-      <MyInput
-        placeholder='Search...'
-        value={query || ''}
-        onChange={(e) => {
-          const currentQuery = e.target.value;
-          setQuery(currentQuery);
-          settingParams();
-        }}
-      />
+      <MyInput placeholder='Search...' />
       <MySelect
         defaultValue='Sort options...'
-        value={sort || 'default'}
         options={[
           { value: 'price-ASC', name: 'Sort by price ASC' },
           { value: 'price-DESC', name: 'Sort by price DESC' },
@@ -92,11 +68,6 @@ export default function ProductFilter({
           { value: 'discount-ASC', name: 'Sort by discount ASC' },
           { value: 'discount-DESC', name: 'Sort by discount DESC' },
         ]}
-        onChange={(e) => {
-          const currentSort = e.target.value;
-          setSort(currentSort);
-          settingParams();
-        }}
       />
       <RangeSliderPrice price={price} setPrice={setPrice} title='Price' step={5} />
       <RangeSliderStock stock={stock} setStock={setStock} title='Stock' step={1} />
