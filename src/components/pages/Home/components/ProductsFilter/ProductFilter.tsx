@@ -13,14 +13,7 @@ import dataProducts from '../../../../../assets/json/products.json';
 import { getListFilterNames } from '../../functions/functions';
 import styles from './ProductFilter.module.css';
 
-export default function ProductFilter({
-  price,
-  stock,
-  setPrice,
-  setStock,
-  products,
-  searchParams,
-}: IProductFilter) {
+export default function ProductFilter({ products, searchParams }: IProductFilter) {
   const dispatch = useDispatch();
   const categories = getListFilterNames('category', dataProducts.products);
   const brandes = getListFilterNames('brand', dataProducts.products);
@@ -48,8 +41,8 @@ export default function ProductFilter({
         ]}
         searchParams={searchParams}
       />
-      <RangeSliderPrice price={price} setPrice={setPrice} title='Price' step={5} />
-      <RangeSliderStock stock={stock} setStock={setStock} title='Stock' step={1} />
+      <RangeSliderPrice title='Price' step={5} />
+      <RangeSliderStock title='Stock' step={1} />
       <FilterSelectListCategory products={products} filterNames={categories} />
       <FilterSelectListBrand products={products} filterNames={brandes} />
     </aside>

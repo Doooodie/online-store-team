@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { IProduct, ISelectedSort } from '../types/types';
 
 interface ISlider {
+  query: string[];
   min: number;
   max: number;
   isDefault: boolean;
@@ -41,25 +42,31 @@ export function useSearchProducts(products: IProduct[], query: FilterName<string
 
 export function useSortByPrice(products: IProduct[], price: ISlider) {
   const sortByPrice = useMemo(() => {
+    if (price === undefined) {
+      return [...products];
+    }
     if (price.isDefault) {
       return [...products];
     }
     return [...products].filter(
       (product) => product.price >= price.min && product.price <= price.max,
     );
-  }, [products, price.min, price.max, price.isDefault]);
+  }, [products, price]);
   return sortByPrice;
 }
 
 export function useSortByStock(products: IProduct[], stock: ISlider) {
   const SortByStock = useMemo(() => {
+    if (stock === undefined) {
+      return [...products];
+    }
     if (stock.isDefault) {
       return [...products];
     }
     return [...products].filter(
       (product) => product.stock >= stock.min && product.stock <= stock.max,
     );
-  }, [products, stock.min, stock.max, stock.isDefault]);
+  }, [products, stock]);
   return SortByStock;
 }
 

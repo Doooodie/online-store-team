@@ -20,15 +20,12 @@ export interface IProduct {
 }
 
 export interface IProductFilter {
-  price: SliderChange;
-  stock: SliderChange;
   products: IProduct[];
-  setStock: (model: SliderChange) => void;
-  setPrice: (model: SliderChange) => void;
   searchParams: URLSearchParams;
 }
 
 export type SliderChange = {
+  query: string[];
   min: number;
   max: number;
   isDefault: boolean;

@@ -3,11 +3,36 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 type IFilter = {
   query?: string;
   sort?: string;
-  category?: string[] | string;
-  brand?: string[] | string;
+  category?: string[];
+  brand?: string[];
+  price: {
+    query: string[];
+    max: number;
+    min: number;
+    isDefault: boolean;
+  };
+  stock: {
+    query: string[];
+    max: number;
+    min: number;
+    isDefault: boolean;
+  };
 };
 
-const initialState: IFilter = {};
+const initialState: IFilter = {
+  price: {
+    query: ['0', '1750'],
+    min: 0,
+    max: 1750,
+    isDefault: true,
+  },
+  stock: {
+    query: ['2', '150'],
+    min: 2,
+    max: 150,
+    isDefault: true,
+  },
+};
 
 const filterSlice = createSlice({
   name: 'filter',
@@ -86,8 +111,29 @@ const filterSlice = createSlice({
         if (currentState.brand) delete currentState.brand;
       }
     },
+    setPrice(state, action) {
+      const currentState = state;
+      const price = action.payload;
+      currentState.price = {
+        query: [String(price.min), String(price.max)],
+        min: price.min,
+        max: price.max,
+        isDefault: price.isDefault,
+      };
+    },
+    setStock(state, action) {
+      const currentState = state;
+      const stock = action.payload;
+      currentState.stock = {
+        query: [String(stock.min), String(stock.max)],
+        min: stock.min,
+        max: stock.max,
+        isDefault: stock.isDefault,
+      };
+    },
   },
 });
 
-export const { setQuery, setSort, setCategory, setBrand, resetFilter } = filterSlice.actions;
+export const { setQuery, setSort, setCategory, setBrand, resetFilter, setPrice, setStock } =
+  filterSlice.actions;
 export default filterSlice.reducer;
