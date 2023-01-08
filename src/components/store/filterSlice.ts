@@ -3,9 +3,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 type IFilter = {
   query?: string;
   sort?: string;
+  category?: string[];
+  brand?: string[];
 };
 
-const initialState: IFilter = {};
+const initialState: IFilter = {
+  category: [],
+  brand: [],
+};
 
 const filterSlice = createSlice({
   name: 'filter',
@@ -27,8 +32,45 @@ const filterSlice = createSlice({
         delete currentState.sort;
       }
     },
+    setCategory(state, action) {
+      const currentState = state;
+      const category = action.payload;
+      if (currentState.category) {
+        if (currentState.category.indexOf(category) > -1) {
+          currentState.category.splice(currentState.category.indexOf(category), 1);
+          if (!currentState.category.length) delete currentState.category;
+        } else {
+          currentState.category.push(category);
+        }
+      } else {
+        currentState.category = [category];
+      }
+    },
+    setBrand(state, action) {
+      const currentState = state;
+      const brand = action.payload;
+      if (currentState.brand) {
+        if (currentState.brand.indexOf(brand) > -1) {
+          currentState.brand.splice(currentState.brand.indexOf(brand), 1);
+          if (!currentState.brand.length) delete currentState.brand;
+        } else {
+          currentState.brand.push(brand);
+        }
+      } else {
+        currentState.brand = [brand];
+      }
+    },
+    resetFilter(state, action) {
+      const currentState = state;
+      if (action.payload) {
+        if (currentState.query) delete currentState.query;
+        if (currentState.sort) delete currentState.sort;
+        if (currentState.category) delete currentState.category;
+        if (currentState.brand) delete currentState.brand;
+      }
+    },
   },
 });
 
-export const { setQuery, setSort } = filterSlice.actions;
+export const { setQuery, setSort, setCategory, setBrand, resetFilter } = filterSlice.actions;
 export default filterSlice.reducer;

@@ -12,8 +12,7 @@ import findInterval from './functions/functions';
 function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
   const filter = useAppSelector((state) => state.filter);
-
-  const { query, sort } = filter;
+  const { query, sort, category, brand } = filter;
 
   useEffect(() => {
     setSearchParams(filter);
@@ -34,8 +33,6 @@ function Home() {
     isDefault: true,
   });
 
-  const [category, setCategory] = useState<Array<string>>([]);
-  const [brand, setBrand] = useState<Array<string>>([]);
   const [big, setBig] = useState<boolean | undefined>(undefined);
 
   const filteredProducts = useFilterProducts(products, sort, query, price, stock, category, brand);
@@ -63,10 +60,6 @@ function Home() {
         products={filteredProducts}
         setPrice={setPrice}
         setStock={setStock}
-        category={category}
-        setCategory={setCategory}
-        brand={brand}
-        setBrand={setBrand}
         searchParams={searchParams}
       />
       <ProductList big={big} setBig={setBig} products={filteredProducts} />

@@ -25,10 +25,6 @@ export interface IProductFilter {
   products: IProduct[];
   setStock: (model: SliderChange) => void;
   setPrice: (model: SliderChange) => void;
-  category: string[];
-  setCategory: (model: string[]) => void;
-  brand: string[];
-  setBrand: (model: string[]) => void;
   searchParams: URLSearchParams;
 }
 
@@ -77,11 +73,6 @@ export enum KeysOfProduct {
 export interface IFilterSelectListProps {
   products: IProduct[];
   filterNames: [string, number][];
-  filterName: string;
-  keys: string[];
-  setKeys: (model: string[]) => void;
-  checkBoxList: ICheckBox[];
-  setCheckBoxList: (model: ICheckBox[]) => void;
 }
 
 export interface ICheckBox {

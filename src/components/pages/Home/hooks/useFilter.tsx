@@ -63,8 +63,9 @@ export function useSortByStock(products: IProduct[], stock: ISlider) {
   return SortByStock;
 }
 
-export function useFilterByBrand(product: IProduct[], brandNames: string[]) {
+export function useFilterByBrand(product: IProduct[], brandNames: string[] | undefined) {
   const filteredByBrand = useMemo(() => {
+    if (brandNames === undefined) return product;
     if (!brandNames.length) {
       return product;
     }
@@ -81,8 +82,9 @@ export function useFilterByBrand(product: IProduct[], brandNames: string[]) {
   return filteredByBrand;
 }
 
-export function useFilterByCategory(product: IProduct[], categoryNames: string[]) {
+export function useFilterByCategory(product: IProduct[], categoryNames: string[] | undefined) {
   const filteredByCategory = useMemo(() => {
+    if (categoryNames === undefined) return product;
     if (!categoryNames.length) {
       return product;
     }
@@ -107,8 +109,8 @@ export function useFilterProducts(
   query: FilterName<string>,
   price: ISlider,
   stock: ISlider,
-  category: string[],
-  brand: string[],
+  category: string[] | undefined,
+  brand: string[] | undefined,
 ) {
   const filteredByCategory = useFilterByCategory(products, category);
   const filteredByBrand = useFilterByBrand(filteredByCategory, brand);
