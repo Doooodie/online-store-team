@@ -27,8 +27,8 @@ const initialState: IFilter = {
     isDefault: true,
   },
   stock: {
-    query: ['2', '150'],
-    min: 2,
+    query: ['0', '150'],
+    min: 0,
     max: 150,
     isDefault: true,
   },
@@ -110,6 +110,18 @@ const filterSlice = createSlice({
         if (currentState.category) delete currentState.category;
         if (currentState.brand) delete currentState.brand;
       }
+      currentState.price = {
+        query: ['0', '1750'],
+        min: 0,
+        max: 1750,
+        isDefault: true,
+      };
+      currentState.stock = {
+        query: ['0', '150'],
+        min: 0,
+        max: 150,
+        isDefault: true,
+      };
     },
     setPrice(state, action) {
       const currentState = state;

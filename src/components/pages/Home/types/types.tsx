@@ -84,3 +84,12 @@ export interface IParams {
   query?: string;
   sort?: string;
 }
+
+export type IQuery = {
+  query?: string;
+  sort?: string;
+  category?: string;
+  brand?: string;
+  price?: string;
+  stock?: string;
+};

@@ -12,12 +12,8 @@ function valuetext(value: number) {
 }
 
 export default function RangeSliderPrice({ title, step }: SliderProps) {
-  const init = {
-    min: 0,
-    max: 1750,
-  };
   const dispatch = useAppDispatch();
-  const price = useAppSelector((state) => state.filter.price) || init;
+  const price = useAppSelector((state) => state.filter.price);
 
   const handleChange = (_event: Event, newValue: number | number[]) => {
     const minValue: number = Math.min.apply(null, newValue as number[]);
@@ -27,7 +23,7 @@ export default function RangeSliderPrice({ title, step }: SliderProps) {
         query: [String(minValue), String(maxValue)],
         min: minValue,
         max: maxValue,
-        isDefault: false,
+        isDefault: minValue === 0 && maxValue === 1750,
       }),
     );
   };
@@ -42,7 +38,7 @@ export default function RangeSliderPrice({ title, step }: SliderProps) {
         valueLabelDisplay='auto'
         getAriaValueText={valuetext}
         min={0}
-        max={1500}
+        max={1750}
         step={step}
       />
     </Box>

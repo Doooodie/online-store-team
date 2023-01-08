@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks';
 import ProductList from './components/ProductList/ProductList';
 import Container from './components/Container/Container';
 import ProductFilter from './components/ProductsFilter/ProductFilter';
-import { KeysOfProduct } from './types/types';
+import { KeysOfProduct, IQuery } from './types/types';
 import { useFilterProducts } from './hooks/useFilter';
 import dataProducts from '../../../assets/json/products.json';
 import findInterval from './functions/functions';
@@ -14,30 +14,7 @@ function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useAppDispatch();
   const filter = useAppSelector((state) => state.filter);
-  const { query, sort, category, brand } = filter;
-  const initPrice = {
-    query: ['0', '1750'],
-    min: 0,
-    max: 1750,
-    isDefault: false,
-  };
-  const initStock = {
-    query: ['0', '150'],
-    min: 0,
-    max: 150,
-    isDefault: false,
-  };
-  const price = filter.price || initPrice;
-  const stock = filter.stock || initStock;
-
-  type IQuery = {
-    query?: string;
-    sort?: string;
-    category?: string;
-    brand?: string;
-    price?: string;
-    stock?: string;
-  };
+  const { query, sort, category, brand, price, stock } = filter;
 
   useEffect(() => {
     const myFilter: IQuery = {};
@@ -52,20 +29,6 @@ function Home() {
 
   const productsArray = dataProducts.products;
   const [products] = useState(productsArray);
-
-  // const [price, setPrice] = useState({
-  //   min: 0,
-  //   max: 1750,
-  //   isDefault: true,
-  // });
-
-  // const [stock, setStock] = useState({
-  //   query: ['hello', 'hello'],
-  //   min: 2,
-  //   max: 150,
-  //   isDefault: true,
-  // });
-
   const [big, setBig] = useState<boolean | undefined>(undefined);
 
   const filteredProducts = useFilterProducts(products, sort, query, price, stock, category, brand);
@@ -80,7 +43,7 @@ function Home() {
           query: [String(resultPrice.min), String(resultPrice.max)],
           min: resultPrice.min,
           max: resultPrice.max,
-          isDefault: false,
+          isDefault: true,
         }),
       );
     }
@@ -93,7 +56,7 @@ function Home() {
           query: [String(resultStock.min), String(resultStock.max)],
           min: resultStock.min,
           max: resultStock.max,
-          isDefault: false,
+          isDefault: true,
         }),
       );
     }
