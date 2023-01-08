@@ -3,8 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 type IFilter = {
   query?: string;
   sort?: string;
-  category?: string[];
-  brand?: string[];
+  category?: string[] | string;
+  brand?: string[] | string;
 };
 
 const initialState: IFilter = {
@@ -35,7 +35,7 @@ const filterSlice = createSlice({
     setCategory(state, action) {
       const currentState = state;
       const category = action.payload;
-      if (currentState.category) {
+      if (currentState.category && Array.isArray(currentState.category)) {
         if (currentState.category.indexOf(category) > -1) {
           currentState.category.splice(currentState.category.indexOf(category), 1);
           if (!currentState.category.length) delete currentState.category;
@@ -49,7 +49,7 @@ const filterSlice = createSlice({
     setBrand(state, action) {
       const currentState = state;
       const brand = action.payload;
-      if (currentState.brand) {
+      if (currentState.brand && Array.isArray(currentState.brand)) {
         if (currentState.brand.indexOf(brand) > -1) {
           currentState.brand.splice(currentState.brand.indexOf(brand), 1);
           if (!currentState.brand.length) delete currentState.brand;

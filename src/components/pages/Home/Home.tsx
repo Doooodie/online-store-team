@@ -15,7 +15,12 @@ function Home() {
   const { query, sort, category, brand } = filter;
 
   useEffect(() => {
-    setSearchParams(filter);
+    const myFilter = { ...filter };
+    if (myFilter.brand && Array.isArray(myFilter.brand)) myFilter.brand = myFilter.brand.join(' ');
+    if (myFilter.category && Array.isArray(myFilter.category)) {
+      myFilter.category = myFilter.category.join(' ');
+    }
+    setSearchParams(myFilter);
   }, [setSearchParams, filter]);
 
   const productsArray = dataProducts.products;
