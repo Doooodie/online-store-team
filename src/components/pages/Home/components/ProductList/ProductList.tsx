@@ -2,13 +2,13 @@ import Product from '../Product/Product';
 import { IProduct } from '../../types/types';
 import './ProductList.css';
 import ToggleButtons from '../ToggleButtons/ToggleButtons';
+import { useAppSelector } from '../../../../hooks';
 
 export interface ProductListProps {
   products: IProduct[] | undefined;
-  big: boolean | undefined;
-  setBig: (value: boolean) => void;
 }
-export default function ProductList({ products, big, setBig }: ProductListProps) {
+export default function ProductList({ products }: ProductListProps) {
+  const big = useAppSelector((state) => state.filter.big);
   const isBig = big === undefined || big === true;
 
   if (products?.length === 0) {
@@ -17,7 +17,7 @@ export default function ProductList({ products, big, setBig }: ProductListProps)
   if (products !== undefined) {
     return (
       <main className='product-list-wrapper'>
-        <ToggleButtons setBig={setBig} />
+        <ToggleButtons />
         <h3>Found: {products.length}</h3>
         <div className={`product-list ${isBig ? '' : 'product-list-small'}`}>
           {products.map((item) => (

@@ -1,22 +1,31 @@
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { SliderChange } from '../../types/types';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { setPrice } from '../../../../store/filterSlice';
 
 interface SliderProps {
   title: string;
   step: number;
-  price: SliderChange;
-  setPrice: (model: SliderChange) => void;
 }
 function valuetext(value: number) {
   return `${value}°C`;
 }
 
-export default function RangeSliderPrice({ title, step, price, setPrice }: SliderProps) {
+export default function RangeSliderPrice({ title, step }: SliderProps) {
+  const dispatch = useAppDispatch();
+  const price = useAppSelector((state) => state.filter.price);
+
   const handleChange = (_event: Event, newValue: number | number[]) => {
     const minValue: number = Math.min.apply(null, newValue as number[]);
     const maxValue: number = Math.max.apply(null, newValue as number[]);
-    setPrice({ min: minValue, max: maxValue, isDefault: false });
+    dispatch(
+      setPrice({
+        query: [String(minValue), String(maxValue)],
+        min: minValue,
+        max: maxValue,
+        isDefault: minValue === 0 && maxValue === 1750,
+      }),
+    );
   };
 
   return (
@@ -29,7 +38,7 @@ export default function RangeSliderPrice({ title, step, price, setPrice }: Slide
         valueLabelDisplay='auto'
         getAriaValueText={valuetext}
         min={0}
-        max={1500}
+        max={1750}
         step={step}
       />
     </Box>

@@ -2,13 +2,15 @@ import { useMemo } from 'react';
 import { IProduct, ISelectedSort } from '../types/types';
 
 interface ISlider {
+  query: string[];
   min: number;
   max: number;
   isDefault: boolean;
 }
 
-export function useSortedPost(products: IProduct[], sort: string) {
+export function useSortedPost(products: IProduct[], sort: FilterName<string>) {
   const getSortedProducts = useMemo(() => {
+    if (sort === null || sort === undefined) return [...products];
     const sortValue = sort.split('-')[0] as keyof ISelectedSort;
     const reverse = sort.split('-')[1];
     if (sortValue === 'default') return [...products];
@@ -18,7 +20,7 @@ export function useSortedPost(products: IProduct[], sort: string) {
   return getSortedProducts;
 }
 
-export function useSearchProducts(products: IProduct[], query: string) {
+export function useSearchProducts(products: IProduct[], query: FilterName<string>) {
   const searchProducts = useMemo(() => {
     if (query) {
       return [...products].filter(
@@ -40,30 +42,37 @@ export function useSearchProducts(products: IProduct[], query: string) {
 
 export function useSortByPrice(products: IProduct[], price: ISlider) {
   const sortByPrice = useMemo(() => {
+    if (price === undefined) {
+      return [...products];
+    }
     if (price.isDefault) {
       return [...products];
     }
     return [...products].filter(
       (product) => product.price >= price.min && product.price <= price.max,
     );
-  }, [products, price.min, price.max, price.isDefault]);
+  }, [products, price]);
   return sortByPrice;
 }
 
 export function useSortByStock(products: IProduct[], stock: ISlider) {
   const SortByStock = useMemo(() => {
+    if (stock === undefined) {
+      return [...products];
+    }
     if (stock.isDefault) {
       return [...products];
     }
     return [...products].filter(
       (product) => product.stock >= stock.min && product.stock <= stock.max,
     );
-  }, [products, stock.min, stock.max, stock.isDefault]);
+  }, [products, stock]);
   return SortByStock;
 }
 
-export function useFilterByBrand(product: IProduct[], brandNames: string[]) {
+export function useFilterByBrand(product: IProduct[], brandNames: string[] | undefined | string) {
   const filteredByBrand = useMemo(() => {
+    if (brandNames === undefined || !Array.isArray(brandNames)) return product;
     if (!brandNames.length) {
       return product;
     }
@@ -80,8 +89,12 @@ export function useFilterByBrand(product: IProduct[], brandNames: string[]) {
   return filteredByBrand;
 }
 
-export function useFilterByCategory(product: IProduct[], categoryNames: string[]) {
+export function useFilterByCategory(
+  product: IProduct[],
+  categoryNames: string[] | undefined | string,
+) {
   const filteredByCategory = useMemo(() => {
+    if (categoryNames === undefined || !Array.isArray(categoryNames)) return product;
     if (!categoryNames.length) {
       return product;
     }
@@ -98,14 +111,16 @@ export function useFilterByCategory(product: IProduct[], categoryNames: string[]
   return filteredByCategory;
 }
 
+type FilterName<T> = T | null | undefined;
+
 export function useFilterProducts(
   products: IProduct[],
-  sort: string,
-  query: string,
+  sort: FilterName<string>,
+  query: FilterName<string>,
   price: ISlider,
   stock: ISlider,
-  category: string[],
-  brand: string[],
+  category: string[] | undefined | string,
+  brand: string[] | undefined | string,
 ) {
   const filteredByCategory = useFilterByCategory(products, category);
   const filteredByBrand = useFilterByBrand(filteredByCategory, brand);

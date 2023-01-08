@@ -2,18 +2,24 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import ViewCompactIcon from '@mui/icons-material/ViewCompact';
 import GridViewIcon from '@mui/icons-material/GridView';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { setBig } from '../../../../store/filterSlice';
 
-interface IToggleButtonsProps {
-  setBig: (value: boolean) => void;
-}
+export default function ToggleButtons() {
+  const dispatch = useAppDispatch();
+  const size = useAppSelector((state) => state.filter.big);
+  const isRight = size === true || size === undefined;
+  const [alignment, setAlignment] = useState<string | null>('');
 
-export default function ToggleButtons({ setBig }: IToggleButtonsProps) {
-  const [alignment, setAlignment] = useState<string | null>('right');
+  useEffect(() => {
+    setAlignment(isRight ? 'right' : 'left');
+  }, [isRight]);
 
   const handleAlignment = (_event: React.MouseEvent<HTMLElement>, newAlignment: string | null) => {
-    const isBig = newAlignment === 'right';
-    setBig(isBig);
+    if (newAlignment === null) return;
+    if (newAlignment === 'right') dispatch(setBig(true));
+    if (newAlignment === 'left') dispatch(setBig(false));
     setAlignment(newAlignment);
   };
 

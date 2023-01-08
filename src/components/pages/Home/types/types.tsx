@@ -1,5 +1,3 @@
-import { ChangeEvent } from 'react';
-
 export interface ISelectedSort {
   price: string;
   discountPercentage: string;
@@ -22,20 +20,12 @@ export interface IProduct {
 }
 
 export interface IProductFilter {
-  filter: IFilter;
-  price: SliderChange;
-  stock: SliderChange;
   products: IProduct[];
-  setFilter: (e: IFilter) => void;
-  setStock: (model: SliderChange) => void;
-  setPrice: (model: SliderChange) => void;
-  category: string[];
-  setCategory: (model: string[]) => void;
-  brand: string[];
-  setBrand: (model: string[]) => void;
+  searchParams: URLSearchParams;
 }
 
 export type SliderChange = {
+  query: string[];
   min: number;
   max: number;
   isDefault: boolean;
@@ -43,9 +33,8 @@ export type SliderChange = {
 
 export interface MySelectProps {
   defaultValue: string;
-  value: string;
   options: IOptions[];
-  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  searchParams: URLSearchParams;
 }
 
 export interface IOptions {
@@ -81,11 +70,6 @@ export enum KeysOfProduct {
 export interface IFilterSelectListProps {
   products: IProduct[];
   filterNames: [string, number][];
-  filterName: string;
-  keys: string[];
-  setKeys: (model: string[]) => void;
-  checkBoxList: ICheckBox[];
-  setCheckBoxList: (model: ICheckBox[]) => void;
 }
 
 export interface ICheckBox {
@@ -95,3 +79,18 @@ export interface ICheckBox {
   count: number;
   maxCount: number;
 }
+
+export interface IParams {
+  query?: string;
+  sort?: string;
+}
+
+export type IQuery = {
+  query?: string;
+  sort?: string;
+  category?: string;
+  brand?: string;
+  price?: string;
+  stock?: string;
+  big?: string;
+};
