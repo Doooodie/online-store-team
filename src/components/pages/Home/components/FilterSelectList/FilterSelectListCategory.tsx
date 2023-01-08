@@ -7,7 +7,9 @@ import styles from './FilterSelectList.module.css';
 
 export default function FilterSelectList({ products, filterNames }: IFilterSelectListProps) {
   const dispatch = useDispatch();
-  const category = useAppSelector((state) => state.filter.category) || [];
+
+  const stateCategory = useAppSelector((state) => state.filter.category);
+  const category = stateCategory || [];
 
   function convertStringToObject(array: [string, number][]) {
     const result: ICheckBox[] = [];
@@ -34,8 +36,8 @@ export default function FilterSelectList({ products, filterNames }: IFilterSelec
     return (
       <FormControlLabel
         control={<Checkbox />}
-        onChange={() => dispatch(setCategory(filterName[filter.id].name))}
-        key={filter.id}
+        onChange={() => dispatch(setCategory([filterName[filter.id].name]))}
+        key={`${filter.id} + ${filter.name}`}
         label={`${filter.name} ${filter.count}/${filter.maxCount}`}
         checked={filter.checked}
       />

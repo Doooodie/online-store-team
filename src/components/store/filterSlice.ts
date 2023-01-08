@@ -7,10 +7,7 @@ type IFilter = {
   brand?: string[] | string;
 };
 
-const initialState: IFilter = {
-  category: [],
-  brand: [],
-};
+const initialState: IFilter = {};
 
 const filterSlice = createSlice({
   name: 'filter',
@@ -34,30 +31,50 @@ const filterSlice = createSlice({
     },
     setCategory(state, action) {
       const currentState = state;
-      const category = action.payload;
-      if (currentState.category && Array.isArray(currentState.category)) {
-        if (currentState.category.indexOf(category) > -1) {
-          currentState.category.splice(currentState.category.indexOf(category), 1);
-          if (!currentState.category.length) delete currentState.category;
+      const category: string[] = action.payload;
+      if (category[0] === 'reset') {
+        delete currentState.category;
+        return;
+      }
+      if (category.length > 1) {
+        currentState.category = [...category];
+        return;
+      }
+      if (category.length === 1) {
+        if (currentState.category && Array.isArray(currentState.category)) {
+          if (currentState.category.indexOf(category[0]) > -1) {
+            currentState.category.splice(currentState.category.indexOf(category[0]), 1);
+            if (!currentState.category.length) delete currentState.category;
+          } else {
+            currentState.category.push(category[0]);
+          }
         } else {
-          currentState.category.push(category);
+          currentState.category = [category[0]];
         }
-      } else {
-        currentState.category = [category];
       }
     },
     setBrand(state, action) {
       const currentState = state;
-      const brand = action.payload;
-      if (currentState.brand && Array.isArray(currentState.brand)) {
-        if (currentState.brand.indexOf(brand) > -1) {
-          currentState.brand.splice(currentState.brand.indexOf(brand), 1);
-          if (!currentState.brand.length) delete currentState.brand;
+      const category: string[] = action.payload;
+      if (category[0] === 'reset') {
+        delete currentState.brand;
+        return;
+      }
+      if (category.length > 1) {
+        currentState.brand = [...category];
+        return;
+      }
+      if (category.length === 1) {
+        if (currentState.brand && Array.isArray(currentState.brand)) {
+          if (currentState.brand.indexOf(category[0]) > -1) {
+            currentState.brand.splice(currentState.brand.indexOf(category[0]), 1);
+            if (!currentState.brand.length) delete currentState.brand;
+          } else {
+            currentState.brand.push(category[0]);
+          }
         } else {
-          currentState.brand.push(brand);
+          currentState.brand = [category[0]];
         }
-      } else {
-        currentState.brand = [brand];
       }
     },
     resetFilter(state, action) {
