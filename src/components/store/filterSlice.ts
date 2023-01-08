@@ -17,6 +17,7 @@ type IFilter = {
     min: number;
     isDefault: boolean;
   };
+  big?: boolean;
 };
 
 const initialState: IFilter = {
@@ -109,6 +110,7 @@ const filterSlice = createSlice({
         if (currentState.sort) delete currentState.sort;
         if (currentState.category) delete currentState.category;
         if (currentState.brand) delete currentState.brand;
+        if (currentState.big !== undefined) delete currentState.big;
       }
       currentState.price = {
         query: ['0', '1750'],
@@ -143,9 +145,13 @@ const filterSlice = createSlice({
         isDefault: stock.isDefault,
       };
     },
+    setBig(state, action) {
+      const currentState = state;
+      currentState.big = action.payload;
+    },
   },
 });
 
-export const { setQuery, setSort, setCategory, setBrand, resetFilter, setPrice, setStock } =
+export const { setQuery, setSort, setCategory, setBrand, resetFilter, setPrice, setStock, setBig } =
   filterSlice.actions;
 export default filterSlice.reducer;

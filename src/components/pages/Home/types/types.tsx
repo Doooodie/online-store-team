@@ -92,4 +92,5 @@ export type IQuery = {
   brand?: string;
   price?: string;
   stock?: string;
+  big?: string;
 };
