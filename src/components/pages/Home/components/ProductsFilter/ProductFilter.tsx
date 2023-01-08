@@ -21,6 +21,7 @@ export default function ProductFilter({
   setCategory,
   brand,
   setBrand,
+  searchParams,
 }: IProductFilter) {
   const categories = getListFilterNames('category', dataProducts.products);
   const brandes = getListFilterNames('brand', dataProducts.products);
@@ -57,7 +58,7 @@ export default function ProductFilter({
       >
         Reset Filters
       </Button>
-      <MyInput placeholder='Search...' />
+      <MyInput searchParams={searchParams} placeholder='Search...' />
       <MySelect
         defaultValue='Sort options...'
         options={[
@@ -68,6 +69,7 @@ export default function ProductFilter({
           { value: 'discount-ASC', name: 'Sort by discount ASC' },
           { value: 'discount-DESC', name: 'Sort by discount DESC' },
         ]}
+        searchParams={searchParams}
       />
       <RangeSliderPrice price={price} setPrice={setPrice} title='Price' step={5} />
       <RangeSliderStock stock={stock} setStock={setStock} title='Stock' step={1} />

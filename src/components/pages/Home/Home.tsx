@@ -10,17 +10,14 @@ import dataProducts from '../../../assets/json/products.json';
 import findInterval from './functions/functions';
 
 function Home() {
-  const filter = useAppSelector((state) => state.filter);
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('query') || '';
-  const sort = searchParams.get('sort') || 'default';
+  const filter = useAppSelector((state) => state.filter);
+
+  const { query, sort } = filter;
 
   useEffect(() => {
-    const params: any = {};
-    if (filter.query.length) params.query = filter.query;
-    if (filter.sort !== 'default') params.sort = filter.sort;
-    setSearchParams(params);
-  }, [filter, setSearchParams]);
+    setSearchParams(filter);
+  }, [setSearchParams, filter]);
 
   const productsArray = dataProducts.products;
   const [products] = useState(productsArray);
@@ -70,6 +67,7 @@ function Home() {
         setCategory={setCategory}
         brand={brand}
         setBrand={setBrand}
+        searchParams={searchParams}
       />
       <ProductList big={big} setBig={setBig} products={filteredProducts} />
     </Container>

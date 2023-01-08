@@ -29,6 +29,7 @@ export interface IProductFilter {
   setCategory: (model: string[]) => void;
   brand: string[];
   setBrand: (model: string[]) => void;
+  searchParams: URLSearchParams;
 }
 
 export type SliderChange = {
@@ -40,6 +41,7 @@ export type SliderChange = {
 export interface MySelectProps {
   defaultValue: string;
   options: IOptions[];
+  searchParams: URLSearchParams;
 }
 
 export interface IOptions {
