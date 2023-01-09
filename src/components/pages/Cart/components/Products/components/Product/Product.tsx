@@ -15,14 +15,18 @@ function Product({ id, index }: IProduct) {
   const product = productsData.products.find((item) => item.id === id);
 
   return (
-    <div className='product-container'>
-      <div className='product-index'>{index}</div>
-      <Link to={`/product-details/${id}`} className='product-info'>
-        <img src={product?.images[0]} alt={`${product?.title} logo`} className='product-image' />
-        <div className='product-details'>
-          <h3 className='product-title'>{product?.title}</h3>
-          <p className='product-description'>{product?.description}</p>
-          <div className='product-details-bottom'>
+    <div className='cart-product-container'>
+      <div className='cart-product-index'>{index}</div>
+      <Link to={`/product-details/${id}`} className='cart-product-info'>
+        <img
+          src={product?.images[0]}
+          alt={`${product?.title} logo`}
+          className='cart-product-image'
+        />
+        <div className='cart-product-details'>
+          <h3 className='cart-product-title'>{product?.title}</h3>
+          <p className='cart-product-description'>{product?.description}</p>
+          <div className='cart-product-details-bottom'>
             <span className='details-bottom-info'>Rating: {product?.rating}</span>
             <span className='details-bottom-info'>Discount: {product?.discountPercentage}%</span>
           </div>
