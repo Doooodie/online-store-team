@@ -12,7 +12,11 @@ export default function ProductList({ products }: ProductListProps) {
   const isBig = big === undefined || big === true;
 
   if (products?.length === 0) {
-    return <h1>Posts not find</h1>;
+    return (
+      <div className='container no-page-container no-page-container-products'>
+        <h1 className='no-page-header'>Products not found 😔</h1>
+      </div>
+    );
   }
   if (products !== undefined) {
     return (
@@ -27,5 +31,9 @@ export default function ProductList({ products }: ProductListProps) {
       </main>
     );
   }
-  return <h1>Posts not find</h1>;
+  return (
+    <div className='container no-page-container no-page-container-products'>
+      <h1 className='no-page-header'>Products not found 😔</h1>
+    </div>
+  );
 }

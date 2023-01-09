@@ -26,3 +26,8 @@
 .product-list-small .product-description {
   display: none;
 }
+
+.no-page-container-products {
+  height: 100%;
+  margin: 3rem auto;
+}
