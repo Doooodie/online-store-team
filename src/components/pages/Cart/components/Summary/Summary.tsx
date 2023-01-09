@@ -1,3 +1,6 @@
+import CartItems from '../../../Layout/components/Header/components/CartItems/CartItems';
+import CartTotal from '../../../Layout/components/Header/components/CartTotal/CartTotal';
+
 import './Summary.css';
 
 function Summary() {
@@ -5,10 +8,10 @@ function Summary() {
     <section className='summary-container'>
       <h2 className='summary-heading'>Summary</h2>
       <p className='summary-info'>
-        Products: <strong>10</strong>
+        <CartItems />
       </p>
       <p className='summary-info'>
-        Tolal: <strong>€100</strong>
+        <CartTotal />
       </p>
       <input type='search' placeholder='Enter promocode' className='summary-promo-input' />
       <p className='summary-promo-info'>
