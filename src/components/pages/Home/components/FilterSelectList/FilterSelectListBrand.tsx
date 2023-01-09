@@ -44,8 +44,8 @@ export default function FilterSelectList({ products, filterNames }: IFilterSelec
     );
   }
   return (
-    <section>
-      <h2>Category</h2>
+    <section className='checkbox-filter'>
+      <h3>Category</h3>
       <div className={styles['filter-select-list']}>
         {filterName.map((name) => renderCheckBox(name))}
       </div>

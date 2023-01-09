@@ -1,9 +1,5 @@
-.product-values > li {
-  list-style: none;
-}
-
 .product-list-wrapper {
-  width: 70%;
+  width: 75%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -15,28 +11,18 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
-  background-color: rgba(0 0 0 / 10%);
-  padding: 10px;
-  border-radius: 16px;
 }
 
 .product-list-small {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.product {
-  width: 100%;
-  height: 100%;
-  border: 1px solid black;
-  padding: 10px 25px;
-  border-radius: 16px;
-}
-
 .product-list-small .product {
   width: 100%;
-  padding: 5px;
+  height: 260px;
+  background-size: contain;
 }
 
-.product-list-small .product .product-values {
+.product-list-small .product-description {
   display: none;
 }

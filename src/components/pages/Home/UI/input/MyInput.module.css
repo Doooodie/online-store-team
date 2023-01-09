@@ -1,10 +1,13 @@
 .floating-label {
+  width: 100%;
   border: 1px solid #d1d5db;
   border-radius: 0.25rem;
   position: relative;
+  margin-bottom: 1rem;
 }
 
 .floating-label-input {
+  width: 100%;
   border: none;
   padding: 0.5rem;
   height: 100%;
