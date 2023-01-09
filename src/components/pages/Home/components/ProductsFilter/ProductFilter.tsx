@@ -11,7 +11,7 @@ import FilterSelectListCategory from '../FilterSelectList/FilterSelectListCatego
 import FilterSelectListBrand from '../FilterSelectList/FilterSelectListBrand';
 import dataProducts from '../../../../../assets/json/products.json';
 import { getListFilterNames } from '../../functions/functions';
-import styles from './ProductFilter.module.css';
+import './ProductFilter.css';
 
 export default function ProductFilter({ products, searchParams }: IProductFilter) {
   const dispatch = useDispatch();
@@ -19,8 +19,9 @@ export default function ProductFilter({ products, searchParams }: IProductFilter
   const brandes = getListFilterNames('brand', dataProducts.products);
 
   return (
-    <aside className={styles['product-filter']}>
+    <aside className='product-filter'>
       <Button
+        sx={{ margin: '1rem 0', width: '100%' }}
         onClick={() => dispatch(resetFilter(true))}
         size='small'
         variant='outlined'

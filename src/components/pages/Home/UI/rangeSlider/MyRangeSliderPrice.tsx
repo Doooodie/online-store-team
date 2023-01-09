@@ -29,8 +29,17 @@ export default function RangeSliderPrice({ title, step }: SliderProps) {
   };
 
   return (
-    <Box sx={{ width: 200 }}>
-      <h2>{title}</h2>
+    <Box
+      sx={{
+        width: '90%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: '1rem',
+      }}
+    >
+      <h3>{title}</h3>
       <Slider
         getAriaLabel={() => 'Temperature range'}
         value={[price.min, price.max]}
