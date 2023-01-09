@@ -45,7 +45,7 @@ export default function FilterSelectList({ products, filterNames }: IFilterSelec
   }
   return (
     <section className='checkbox-filter'>
-      <h3>Category</h3>
+      <h3>Brand</h3>
       <div className={styles['filter-select-list']}>
         {filterName.map((name) => renderCheckBox(name))}
       </div>
