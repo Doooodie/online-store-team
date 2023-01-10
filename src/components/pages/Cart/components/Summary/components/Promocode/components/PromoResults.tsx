@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '../../../../../../../hooks';
+import { useAppDispatch /* , useAppSelector */ } from '../../../../../../../hooks';
 import { addPromo } from '../../../../../../../store/promoSlice';
 import promocodesData from '../../../../../../../../assets/json/promocodes.json';
 import './PromoResults.css';
@@ -8,7 +8,7 @@ interface IPromoResults {
 }
 
 function PromoResults({ text }: IPromoResults) {
-  const savedPromos = useAppSelector((state) => state.promo.codes);
+  // const savedPromos = useAppSelector((state) => state.promo.codes);
   const dispatch = useAppDispatch();
 
   const savePromo = () => {
