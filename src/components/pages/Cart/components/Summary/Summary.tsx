@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Promocode from './components/Promocode/Promocode';
 import CartItems from '../../../Layout/components/Header/components/CartItems/CartItems';
 import SummaryTotal from './components/SummaryTotal/SummaryTotal';
 import promocodesData from '../../../../../assets/json/promocodes.json';
+import Modal from '@mui/material/Modal';
 
 import './Summary.css';
+import MyForm from '../Form/MyForm';
 
 function Summary() {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const promosList = promocodesData.codes.map((promo, index) => {
     if (index < promocodesData.codes.length - 1)
       return (
@@ -29,9 +35,12 @@ function Summary() {
       </p>
       <Promocode />
       <p className='summary-promo-info'>Promo for test: {promosList}</p>
-      <button type='button' className='buy-button summary-button'>
+      <button onClick={handleOpen} type='button' className='buy-button summary-button'>
         Buy Now
       </button>
+      <Modal open={open} onClose={handleClose}>
+        <MyForm />
+      </Modal>
     </section>
   );
 }
