@@ -1,12 +1,12 @@
 import React from 'react';
 import Modal from '@mui/material/Modal';
+import { Box } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { changeModalVisibility } from '../../../../store/modalSlice';
 import Promocode from './components/Promocode/Promocode';
 import CartItems from '../../../Layout/components/Header/components/CartItems/CartItems';
 import SummaryTotal from './components/SummaryTotal/SummaryTotal';
 import promocodesData from '../../../../../assets/json/promocodes.json';
-
 import './Summary.css';
 import MyForm from '../Form/MyForm';
 
@@ -42,7 +42,9 @@ function Summary() {
         Buy Now
       </button>
       <Modal open={isModalOpened} onClose={handleClose}>
-        <MyForm />
+        <Box>
+          <MyForm />
+        </Box>
       </Modal>
     </section>
   );

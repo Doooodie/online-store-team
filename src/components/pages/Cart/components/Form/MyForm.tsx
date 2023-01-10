@@ -1,40 +1,73 @@
-import React, { useState } from 'react';
+import { useState, ChangeEvent, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button, TextField } from '@mui/material';
+import { useAppDispatch } from '../../../../hooks';
+import { clearCart } from '../../../../store/cartSlice';
 import './MyForm.css';
 
 export default function MyForm() {
+  const REDIRECT_TIME = 3000;
+  const CLEAR_CART_TIME = 300;
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [name, setName] = useState('');
   const [nameDirty, setNameDirty] = useState(false);
-  const [nameError, setNameError] = useState('Name is empty');
+  const [nameError, setNameError] = useState(true);
 
   const [phone, setPhone] = useState('');
   const [phoneDirty, setPhoneDirty] = useState(false);
-  const [phoneError, setPhoneError] = useState('Phone is empty');
+  const [phoneError, setPhoneError] = useState(true);
 
   const [adress, setAdress] = useState('');
   const [adressDirty, setAdressDirty] = useState(false);
-  const [adressError, setAdressError] = useState('Adress is empty');
+  const [adressError, setAdressError] = useState(true);
 
   const [email, setEmail] = useState('');
   const [emailDirty, setEmailDirty] = useState(false);
-  const [emailError, setEmailError] = useState('Email is empty');
+  const [emailError, setEmailError] = useState(true);
 
   const [card, setCard] = useState('');
   const [cardDirty, setCradDirty] = useState(false);
-  const [cardError, setCardError] = useState('Card number is empty');
+  const [cardError, setCardError] = useState(true);
 
-  const [valid, setvalid] = useState('');
+  const [valid, setValid] = useState('');
   const [validDirty, setValidDirty] = useState(false);
-  const [validError, setValidError] = useState('Code is empty');
+  const [validError, setValidError] = useState(true);
 
   const [date, setDate] = useState('');
   const [dateDirty, setDateDirty] = useState(false);
-  const [dateError, setDateError] = useState('Date is empty');
+  const [dateError, setDateError] = useState(true);
+  const [canRedirect, setCanRedirect] = useState(false);
 
   const [cardLogo, setCardLogo] = useState(
     'https://cdn1.iconfinder.com/data/icons/cash-card-add-on/48/v-22-512.png',
   );
 
-  const blurHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const isActiveButton =
+    !nameError &&
+    !phoneError &&
+    !adressError &&
+    !emailError &&
+    !cardError &&
+    !validError &&
+    !dateError;
+
+  const changeRedirect = () => {
+    if (isActiveButton) setCanRedirect(true);
+  };
+
+  useEffect(() => {
+    if (canRedirect) {
+      setTimeout(() => {
+        navigate('/');
+        setTimeout(() => {
+          dispatch(clearCart(true));
+        }, CLEAR_CART_TIME);
+      }, REDIRECT_TIME);
+    }
+  });
+
+  const blurHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     switch (e.target.name) {
       case 'name':
         setNameDirty(true);
@@ -60,50 +93,72 @@ export default function MyForm() {
       default:
     }
   };
-  const nameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  function checkNumber(currentValue: string, newValue: string) {
+    const isNewValue = newValue.length > currentValue.length;
+    if (isNewValue) {
+      const currentValid = newValue;
+      const currentArr = currentValid.split('');
+      const last = currentValid.charCodeAt(currentArr.length - 1);
+      if (last > 47 && last < 58) return true;
+    } else {
+      return true;
+    }
+    return false;
+  }
+  function checkMaxLength(
+    value: string,
+    maxLength: number,
+    setError: React.Dispatch<React.SetStateAction<boolean>>,
+  ) {
+    if (value.length < maxLength) setError(true);
+    if (value.length === maxLength) setError(false);
+    if (value.length <= maxLength) return true;
+    return false;
+  }
+  const nameHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setName(e.target.value);
     if (e.target.value.split(' ').length < 2) {
-      setNameError('At least 2 words');
+      setNameError(true);
     } else {
-      const allNames = e.target.value.split(' ');
+      const allNames: string[] = e.target.value.split(' ');
       const isGood = allNames.every((item) => item.trim().length > 2);
       if (!isGood) {
-        setNameError('Every word at least 3 symbols');
+        setNameError(true);
       } else {
-        setNameError('');
+        setNameError(false);
       }
     }
   };
-  const phoneHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const phoneHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setPhone(e.target.value);
     if (e.target.value[0] !== '+') {
-      setPhoneError('First symmbol is +');
+      setPhoneError(true);
     } else {
       const currentNumber = e.target.value.split('').splice(1, e.target.value.length);
       const isNumbers = currentNumber.every((num) => typeof Number(num) === 'number');
       const isFullLeangth = currentNumber.length > 9;
       if (!(isNumbers && isFullLeangth)) {
-        setPhoneError('Invalid number');
+        setPhoneError(true);
       } else {
-        setPhoneError('');
+        setPhoneError(false);
       }
     }
   };
-  const adressHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const adressHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setAdress(e.target.value);
     if (e.target.value.split(' ').length < 3) {
-      setAdressError('At least 3 words');
+      setAdressError(true);
     } else {
       const allAdresses = e.target.value.split(' ');
       const isGood = allAdresses.every((item) => item.trim().length > 4);
       if (!isGood) {
-        setAdressError('Every word at least 3 symbols');
+        setAdressError(true);
       } else {
-        setAdressError('');
+        setAdressError(false);
       }
     }
   };
-  const emailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const emailHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setEmail(e.target.value);
     const validateEmail = (emailString: string) =>
       String(emailString)
@@ -112,16 +167,22 @@ export default function MyForm() {
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         );
     if (!validateEmail(e.target.value)) {
-      setEmailError('invalid email');
+      setEmailError(true);
     } else {
-      setEmailError('');
+      setEmailError(false);
     }
   };
-  const cardHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const cardValue = e.target.value;
-    if (cardValue.length < 17) {
-      setCard(cardValue);
-      switch (cardValue.split('')[0]) {
+  const cardHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const current = e.target.value;
+    const isMaxLength = checkMaxLength(current.split(' ').join(''), 16, setCardError);
+    if (checkNumber(card, current) && isMaxLength) {
+      const splitCardNumber = current.replace(/(\d{4}(?!\s))/g, '$1 ');
+      if (current.length > card.length) {
+        setCard(splitCardNumber);
+      } else {
+        setCard(current);
+      }
+      switch (current.split('')[0]) {
         case '3':
           setCardLogo(
             'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/1200px-American_Express_logo_%282018%29.svg.png',
@@ -138,125 +199,142 @@ export default function MyForm() {
         default:
           setCardLogo('https://cdn1.iconfinder.com/data/icons/cash-card-add-on/48/v-22-512.png');
       }
-      if (cardValue.length < 16) {
-        setCardError('At least 16 numbers');
+    }
+  };
+  const validHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const currentValid = e.target.value;
+    const isMaxLength = checkMaxLength(currentValid, 3, setValidError);
+    if (checkNumber(valid, currentValid) && isMaxLength) setValid(currentValid);
+  };
+  const dateHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const current = e.target.value;
+    function validateDate(stringDateate: string) {
+      let isDate = false;
+      const month = `${stringDateate[0]}${stringDateate[1]}`;
+      if (Number(month.replace('0', '')) < 13) isDate = true;
+      return isDate;
+    }
+    function divideDate(stringDateate: string) {
+      const month = `${stringDateate[0]}${stringDateate[1]}`;
+      const year = `${stringDateate[2]}${stringDateate[3]}`;
+      return `${month}/${year}`;
+    }
+    const isMaxLength = checkMaxLength(current, 4, setDateError);
+    if (checkNumber(date, current) && isMaxLength) {
+      if (current.length === 4 && !current.includes('/')) {
+        setDate(divideDate(current));
+        if (!validateDate(current)) setDateError(true);
       } else {
-        setCardError('');
+        setDate(current);
       }
     }
   };
-
-  const validHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const currentValid = e.target.value;
-    if (currentValid.length < 3) {
-      setValidError('At least 3 numbers');
-      setvalid(currentValid);
-    } else if (currentValid.length === 3) {
-      setValidError('');
-      setvalid(currentValid);
-    }
-  };
-
-  const dateHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const currentValid = e.target.value;
-    if (currentValid.length < 4) {
-      setDateError('At least 4 numbers');
-      setDate(currentValid);
-    } else if (currentValid.length === 4) {
-      setDateError('');
-      setDate(currentValid);
-    }
-  };
-
   return (
     <form className='form'>
       <h2 className='form-title'>Personal details</h2>
-      {nameDirty && nameError && <div className='form-error'>{nameError}</div>}
-      <input
-        className='floating-label-input'
-        placeholder='Your name'
+      <TextField
+        sx={{ marginBottom: '1rem' }}
+        fullWidth
+        size='small'
         name='name'
         value={name}
-        onBlur={(e) => blurHandler(e)}
+        error={nameError && nameDirty}
+        id='outlined-required'
+        label='Full name'
         onChange={(e) => nameHandler(e)}
+        onBlur={(e) => blurHandler(e)}
       />
-      {phoneDirty && phoneError && <div className='form-error'>{phoneError}</div>}
-      <input
-        className='floating-label-input'
-        placeholder='Your phone'
+      <TextField
+        sx={{ marginBottom: '1rem' }}
+        fullWidth
+        size='small'
         name='phone'
         value={phone}
-        onBlur={(e) => blurHandler(e)}
+        error={phoneError && phoneDirty}
+        id='outlined-required'
+        label='Number'
         onChange={(e) => phoneHandler(e)}
+        onBlur={(e) => blurHandler(e)}
       />
-      {adressDirty && adressError && <div className='form-error'>{adressError}</div>}
-      <input
-        className='floating-label-input'
-        placeholder='Your adress'
+      <TextField
+        sx={{ marginBottom: '1rem' }}
+        fullWidth
+        size='small'
         name='adress'
         value={adress}
-        onBlur={(e) => blurHandler(e)}
+        error={adressError && adressDirty}
+        id='outlined-required'
+        label='Adress'
         onChange={(e) => adressHandler(e)}
+        onBlur={(e) => blurHandler(e)}
       />
-      {emailDirty && emailError && <div className='form-error'>{emailError}</div>}
-      <input
-        className='floating-label-input'
-        placeholder='Your email'
+      <TextField
+        sx={{ marginBottom: '1rem' }}
+        fullWidth
+        size='small'
         name='email'
         value={email}
-        onBlur={(e) => blurHandler(e)}
+        error={emailError && emailDirty}
+        id='outlined-required'
+        label='E-mail'
         onChange={(e) => emailHandler(e)}
+        onBlur={(e) => blurHandler(e)}
       />
       <h2 className='form-title'>Credit card details</h2>
       <div className='credit-card-container'>
         <div className='credit-card-row'>
           <img src={cardLogo} alt='card-logo' className='card-logo' />
           <div className='credit-card-input'>
-            {cardDirty && cardError && <div className='form-error'>{cardError}</div>}
-            <input
-              className='floating-label-input card-input'
-              placeholder='Your card'
+            <TextField
+              sx={{ marginBottom: '1rem' }}
+              fullWidth
+              size='small'
               name='card'
               value={card}
-              type='number'
-              onBlur={(e) => blurHandler(e)}
+              error={cardError && cardDirty}
+              id='outlined-required'
+              label='Card number'
               onChange={(e) => cardHandler(e)}
+              onBlur={(e) => blurHandler(e)}
             />
           </div>
         </div>
         <div className='credit-card-row'>
           <h3>CVV</h3>
           <div className='credit-card-input'>
-            {validDirty && validError && <div className='form-error'>{validError}</div>}
-            <input
-              className='floating-label-input valid-input'
-              placeholder='Code'
+            <TextField
+              sx={{ marginBottom: '1rem' }}
+              size='small'
               name='valid'
               value={valid}
-              type='number'
-              maxLength={3}
-              onBlur={(e) => blurHandler(e)}
+              error={validError && validDirty}
+              id='outlined-required'
+              label='Code'
               onChange={(e) => validHandler(e)}
+              onBlur={(e) => blurHandler(e)}
             />
           </div>
         </div>
         <div className='credit-card-row'>
           <h3>VALID</h3>
           <div className='credit-card-input'>
-            {dateDirty && dateError && <div className='form-error'>{dateError}</div>}
-            <input
-              className='floating-label-input valid-input'
-              placeholder='Valid Thrue'
+            <TextField
+              sx={{ marginBottom: '1rem' }}
+              size='small'
               name='date'
               value={date}
-              type='number'
-              maxLength={3}
-              onBlur={(e) => blurHandler(e)}
+              error={dateError && dateDirty}
+              id='outlined-required'
+              label='Valid'
               onChange={(e) => dateHandler(e)}
+              onBlur={(e) => blurHandler(e)}
             />
           </div>
         </div>
       </div>
+      <Button variant='outlined' onClick={changeRedirect} disabled={!isActiveButton}>
+        BYU
+      </Button>
     </form>
   );
 }
