@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import Modal from '@mui/material/Modal';
 import Promocode from './components/Promocode/Promocode';
 import CartItems from '../../../Layout/components/Header/components/CartItems/CartItems';
 import SummaryTotal from './components/SummaryTotal/SummaryTotal';
 import promocodesData from '../../../../../assets/json/promocodes.json';
-import Modal from '@mui/material/Modal';
 
 import './Summary.css';
 import MyForm from '../Form/MyForm';
