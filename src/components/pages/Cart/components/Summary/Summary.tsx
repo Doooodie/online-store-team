@@ -1,9 +1,23 @@
+import React from 'react';
+import Promocode from './components/Promocode/Promocode';
 import CartItems from '../../../Layout/components/Header/components/CartItems/CartItems';
-import CartTotal from '../../../Layout/components/Header/components/CartTotal/CartTotal';
+import SummaryTotal from './components/SummaryTotal/SummaryTotal';
+import promocodesData from '../../../../../assets/json/promocodes.json';
 
 import './Summary.css';
 
 function Summary() {
+  const promosList = promocodesData.codes.map((promo, index) => {
+    if (index < promocodesData.codes.length - 1)
+      return (
+        <React.Fragment key={promo.id}>
+          <strong key={promo.id + 1}>{promo.title}</strong>
+          <span key={promo.id + 2}>, </span>
+        </React.Fragment>
+      );
+    return <strong key={promo.id}>{promo.title}</strong>;
+  });
+
   return (
     <section className='summary-container'>
       <h2 className='summary-heading'>Summary</h2>
@@ -11,12 +25,10 @@ function Summary() {
         <CartItems />
       </p>
       <p className='summary-info'>
-        <CartTotal />
+        <SummaryTotal />
       </p>
-      <input type='search' placeholder='Enter promocode' className='summary-promo-input' />
-      <p className='summary-promo-info'>
-        Promo for test: <strong>RS</strong>
-      </p>
+      <Promocode />
+      <p className='summary-promo-info'>Promo for test: {promosList}</p>
       <button type='button' className='buy-button summary-button'>
         Buy Now
       </button>

@@ -39,6 +39,7 @@ export default function MySelect({ defaultValue, options, searchParams }: MySele
           value={value}
           label='Age'
           onChange={handleChange}
+          defaultValue=''
         >
           {options.map((option) => (
             <MenuItem key={option.value} value={option.value}>

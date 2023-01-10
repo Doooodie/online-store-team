@@ -15,14 +15,6 @@
   font-size: 1.5rem;
 }
 
-.summary-promo-input {
-  padding: 0.5rem 1rem;
-  background-color: var(--white);
-  border: 2px solid var(--medium-brown);
-  border-radius: 1rem;
-  outline: none;
-}
-
 .summary-button {
   margin-top: 1rem;
 }

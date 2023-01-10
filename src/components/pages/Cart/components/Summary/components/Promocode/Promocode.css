@@ -1,0 +1,14 @@
+.promo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.summary-promo-input {
+  padding: 0.5rem 1rem;
+  background-color: var(--white);
+  border: 2px solid var(--medium-brown);
+  border-radius: 1rem;
+  outline: none;
+}
