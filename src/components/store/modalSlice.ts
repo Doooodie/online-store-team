@@ -21,4 +21,3 @@ const ModalSlice = createSlice({
 
 export default ModalSlice.reducer;
 export const { changeModalVisibility } = ModalSlice.actions;
-export type { ModalState };

@@ -32,4 +32,3 @@ const PromoSlice = createSlice({
 
 export default PromoSlice.reducer;
 export const { addPromo, removePromo } = PromoSlice.actions;
-export type { Promo };
