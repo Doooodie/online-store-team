@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type Promo = {
   id: number;
+  discount: number;
 };
 
 type PromoState = {
@@ -19,6 +20,7 @@ const PromoSlice = createSlice({
     addPromo(state, action: PayloadAction<Promo>) {
       state.codes.push({
         id: action.payload.id,
+        discount: action.payload.discount,
       });
     },
     removePromo(state, action: PayloadAction<Promo>) {

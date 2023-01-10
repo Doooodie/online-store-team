@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import promocodesData from '../../../../../../../assets/json/promocodes.json';
-import PromoResults from './components/PromoResults';
+import AppliedPromos from './components/AppliedPromos/AppliedPromos';
+import PromoResults from './components/PromoResults/PromoResults';
 
 import './Promocode.css';
 
@@ -28,6 +29,7 @@ function Promocode() {
 
   return (
     <div className='promo-container'>
+      <AppliedPromos />
       <input
         type='search'
         placeholder='Enter promocode'
@@ -35,7 +37,9 @@ function Promocode() {
         value={value}
         onChange={searchPromo}
       />
-      {isPromoFound ? <PromoResults text={resultsText} /> : null}
+      {isPromoFound ? (
+        <PromoResults text={resultsText} setInputValue={setValue} setPromoFound={setPromoFound} />
+      ) : null}
     </div>
   );
 }
