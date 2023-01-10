@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from '@mui/material/Modal';
 import { Box } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { changeModalVisibility } from '../../../../store/modalSlice';
 import Promocode from './components/Promocode/Promocode';
 import CartItems from '../../../Layout/components/Header/components/CartItems/CartItems';
 import SummaryTotal from './components/SummaryTotal/SummaryTotal';
@@ -9,9 +11,10 @@ import './Summary.css';
 import MyForm from '../Form/MyForm';
 
 function Summary() {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const isModalOpened = useAppSelector((state) => state.modal.isOpened);
+  const dispatch = useAppDispatch();
+  const handleOpen = () => dispatch(changeModalVisibility({ isOpened: true }));
+  const handleClose = () => dispatch(changeModalVisibility({ isOpened: false }));
 
   const promosList = promocodesData.codes.map((promo, index) => {
     if (index < promocodesData.codes.length - 1)
@@ -38,7 +41,7 @@ function Summary() {
       <button onClick={handleOpen} type='button' className='buy-button summary-button'>
         Buy Now
       </button>
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={isModalOpened} onClose={handleClose}>
         <Box>
           <MyForm />
         </Box>
