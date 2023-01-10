@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../../../../../hooks';
 import productsData from '../../../../../../../assets/json/products.json';
+import Counter from './components/Counter';
 
 import './Product.css';
 
@@ -10,8 +10,6 @@ interface IProduct {
 }
 
 function Product({ id, index }: IProduct) {
-  const productsInCart = useAppSelector((state) => state.cart.products);
-  const productCount = productsInCart.find((item) => item.id === id)?.count;
   const product = productsData.products.find((item) => item.id === id);
 
   return (
@@ -34,15 +32,7 @@ function Product({ id, index }: IProduct) {
       </Link>
       <div className='details-count'>
         <p>Stock: {product?.stock}</p>
-        <div className='details-counter'>
-          <button type='button' className='counter-button'>
-            -
-          </button>
-          <span className='counter-number'>{productCount}</span>
-          <button type='button' className='counter-button'>
-            +
-          </button>
-        </div>
+        <Counter id={id as number} />
         <p>€{product?.price}</p>
       </div>
     </div>

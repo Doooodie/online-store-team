@@ -16,54 +16,8 @@
   color: var(--black);
 }
 
-.header-controls {
-  display: flex;
-  gap: 2rem;
-}
-
-.limit-input {
-  height: 2rem;
-  text-align: center;
-  outline: none;
-  border: 2px solid var(--medium-brown);
-  border-radius: 0.5rem;
-  background-color: var(--white);
-}
-
-.limit-input::-webkit-outer-spin-button,
-.limit-input::-webkit-inner-spin-button {
-  height: 2rem;
-}
-
-.pagination-button {
-  cursor: pointer;
-  width: 2rem;
-  height: 2rem;
-  color: var(--white);
-  background-color: var(--medium-brown);
-  border: none;
-  border-radius: 0.5rem;
-  transition: background-color 0.3s;
-}
-
-.pagination-button:hover {
-  background-color: var(--dark-brown);
-}
-
-.pagination-number {
-  margin: 0 0.5rem;
-}
-
 @media (max-width: 580px) {
   .products-header {
     justify-content: center;
-  }
-}
-
-@media (max-width: 360px) {
-  .header-controls {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
   }
 }

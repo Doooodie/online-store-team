@@ -64,34 +64,10 @@
 .details-count {
   flex-basis: 17%;
   flex-shrink: 0;
-  align-self: stretch;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 1rem;
-}
-
-.details-counter {
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  gap: 1rem;
-}
-
-.counter-button {
-  cursor: pointer;
-  width: 2rem;
-  height: 2rem;
-  color: var(--white);
-  background-color: var(--medium-brown);
-  border: none;
-  border-radius: 50%;
-  transition: background-color 0.3s;
-}
-
-.counter-button:hover {
-  background-color: var(--dark-brown);
 }
 
 @media (max-width: 830px) {
@@ -100,7 +76,7 @@
   }
 }
 
-@media (max-width: 690px) {
+@media (max-width: 730px) {
   .cart-product-container {
     flex-direction: column;
     justify-content: center;

@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../../../../../hooks';
 
-function CartTotal() {
+function SummaryTotal() {
   const products = useAppSelector((state) => state.cart.products);
   const price = products.reduce((sum, current) => sum + current.price * current.count, 0);
 
@@ -11,4 +11,4 @@ function CartTotal() {
   );
 }
 
-export default CartTotal;
+export default SummaryTotal;

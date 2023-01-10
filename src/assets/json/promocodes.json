@@ -1,0 +1,16 @@
+{
+  "codes": [
+    {
+      "id": 1,
+      "title": "RS",
+      "description": "Rolling Scopes School - 10%",
+      "discountPercentage": 10
+    },
+    {
+      "id": 2,
+      "title": "EPM",
+      "description": "EPAM Systems - 10%",
+      "discountPercentage": 10
+    }
+  ]
+}

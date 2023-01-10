@@ -12,10 +12,12 @@ import {
 import storage from 'redux-persist/lib/storage';
 import cartReducer from './cartSlice';
 import filterReducer from './filterSlice';
+import promoReducer from './promoSlice';
 
 const rootReducer = combineReducers({
   cart: cartReducer,
   filter: filterReducer,
+  promo: promoReducer,
 });
 
 const persistConfig = {

@@ -2,11 +2,11 @@ import { useAppSelector } from '../../../../../../hooks';
 
 function CartItems() {
   const products = useAppSelector((state) => state.cart.products);
-  const itemsCount = products.length;
+  const itemsCount = products.reduce((sum, current) => sum + current.count, 0);
 
   return (
     <span>
-      Cart items: <strong>{itemsCount}</strong>
+      Products: <strong>{itemsCount}</strong>
     </span>
   );
 }
