@@ -33,7 +33,7 @@ function Summary() {
       <p className='summary-info'>
         <CartItems />
       </p>
-      <p className='summary-info'>
+      <p className='summary-info summary-total'>
         <SummaryTotal />
       </p>
       <Promocode />

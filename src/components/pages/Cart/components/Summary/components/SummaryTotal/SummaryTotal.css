@@ -1,5 +1,7 @@
-.price-total {
-  text-align: center;
+.summary-total {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .price-crossed {

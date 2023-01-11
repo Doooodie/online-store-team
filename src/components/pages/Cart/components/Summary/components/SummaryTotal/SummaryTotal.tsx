@@ -15,20 +15,20 @@ function SummaryTotal() {
   if (savedDiscounts.length) {
     return (
       <>
-        <p className='price-total price-crossed'>
+        <span className='price-total price-crossed'>
           Total: <strong>€{price}</strong>
-        </p>
-        <p className='price-total'>
+        </span>
+        <span className='price-total'>
           Total: <strong>€{result.toFixed(2)}</strong>
-        </p>
+        </span>
       </>
     );
   }
 
   return (
-    <p className='price-total'>
+    <span className='price-total'>
       Total: <strong>€{price}</strong>
-    </p>
+    </span>
   );
 }
 
