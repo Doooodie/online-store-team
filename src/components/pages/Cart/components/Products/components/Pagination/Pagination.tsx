@@ -23,13 +23,13 @@ function Pagination({ limit, page, setLimit, setPage, setSearchParams }: IPagina
   };
 
   const prevPage = () => {
-    const newPage = page - 1;
+    const newPage = page > 1 ? page - 1 : page;
     params.page = newPage.toString();
     setSearchParams(params);
     return page > 1 && setPage(newPage);
   };
   const nextPage = () => {
-    const newPage = page + 1;
+    const newPage = page < productsLength / limit ? page + 1 : page;
     params.page = newPage.toString();
     setSearchParams(params);
     return page < productsLength / limit && setPage(newPage);
