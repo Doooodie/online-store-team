@@ -35,10 +35,8 @@ export default function ProductFilter({ products, searchParams }: IProductFilter
         options={[
           { value: 'price-ASC', name: 'Sort by price ASC' },
           { value: 'price-DESC', name: 'Sort by price DESC' },
-          { value: 'name-ASC', name: 'Sort by rating ASC' },
-          { value: 'name-DESC', name: 'Sort by rating DESC' },
-          { value: 'discount-ASC', name: 'Sort by discount ASC' },
-          { value: 'discount-DESC', name: 'Sort by discount DESC' },
+          { value: 'discountPercentage-ASC', name: 'Sort by discount ASC' },
+          { value: 'discountPercentage-DESC', name: 'Sort by discount DESC' }
         ]}
         searchParams={searchParams}
       />
