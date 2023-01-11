@@ -43,7 +43,7 @@ export default function MySelect({ defaultValue, options, searchParams }: MySele
         >
           {options.map((option) => (
             <MenuItem key={option.value} value={option.value}>
-              {option.value}
+              {option.name}
             </MenuItem>
           ))}
         </Select>
