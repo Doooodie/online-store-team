@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button } from '@mui/material';
 import { resetFilter } from '../../../../store/filterSlice';
@@ -15,8 +16,22 @@ import './ProductFilter.css';
 
 export default function ProductFilter({ products, searchParams }: IProductFilter) {
   const dispatch = useDispatch();
+  const [linkText, setLinkText] = useState('Copy');
   const categories = getListFilterNames('category', dataProducts.products);
   const brandes = getListFilterNames('brand', dataProducts.products);
+
+  function copiedLink() {
+    const link = window.location.href;
+    navigator.clipboard
+      .writeText(link)
+      .then(() => {
+        setLinkText('Copied!');
+        setTimeout(() => setLinkText('Copy'), 1000);
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  }
 
   return (
     <aside className='product-filter'>
@@ -29,14 +44,23 @@ export default function ProductFilter({ products, searchParams }: IProductFilter
       >
         Reset Filters
       </Button>
+      <Button
+        sx={{ marginBottom: '1rem', width: '100%' }}
+        onClick={() => copiedLink()}
+        size='small'
+        variant='outlined'
+        startIcon={<DeleteIcon />}
+      >
+        {linkText}
+      </Button>
       <MyInput searchParams={searchParams} placeholder='Search...' />
       <MySelect
         defaultValue='Sort options...'
         options={[
           { value: 'price-ASC', name: 'Sort by price ASC' },
           { value: 'price-DESC', name: 'Sort by price DESC' },
-          { value: 'discount-ASC', name: 'Sort by discount ASC' },
-          { value: 'discount-DESC', name: 'Sort by discount DESC' },
+          { value: 'discountPercentage-ASC', name: 'Sort by discount ASC' },
+          { value: 'discountPercentage-DESC', name: 'Sort by discount DESC' },
         ]}
         searchParams={searchParams}
       />
