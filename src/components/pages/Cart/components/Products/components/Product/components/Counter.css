@@ -1,0 +1,23 @@
+.details-counter {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  min-width: 114px;
+  gap: 1rem;
+}
+
+.counter-button {
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  color: var(--white);
+  background-color: var(--medium-brown);
+  border: none;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.counter-button:hover {
+  background-color: var(--dark-brown);
+}

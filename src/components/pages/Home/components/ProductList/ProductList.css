@@ -1,0 +1,33 @@
+.product-list-wrapper {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.product-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.product-list-small {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.product-list-small .product {
+  width: 100%;
+  height: 260px;
+  background-size: contain;
+}
+
+.product-list-small .product-description {
+  display: none;
+}
+
+.no-page-container-products {
+  height: 100%;
+  margin: 3rem auto;
+}

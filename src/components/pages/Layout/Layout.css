@@ -1,0 +1,31 @@
+@media (max-width: 500px) {
+  .wrapper {
+    font-size: 14px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.header,
+.footer {
+  background-color: var(--medium-white);
+}
+
+.main {
+  background: var(--white);
+}
+
+.layout-links {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  row-gap: 20px;
+  list-style-type: none;
+}

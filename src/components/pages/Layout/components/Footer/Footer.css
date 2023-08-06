@@ -1,0 +1,29 @@
+.footer {
+  padding: 20px 0 30px;
+}
+
+.rsschool-logo-container {
+  width: 150px;
+}
+
+.rsschool-logo {
+  padding: 10px;
+  transition: all 0.3s;
+  filter: invert(35%) sepia(60%) saturate(282%) hue-rotate(1deg) brightness(92%) contrast(86%);
+  border-radius: 5px;
+}
+
+.rsschool-logo-link:hover > .rsschool-logo {
+  background-color: var(--light-brown);
+  filter: unset;
+}
+
+.footer-link {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}

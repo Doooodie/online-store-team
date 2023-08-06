@@ -1,0 +1,23 @@
+.products-container {
+  flex-basis: 70%;
+  display: grid;
+  grid-auto-rows: 0fr 1fr;
+  gap: 1rem;
+}
+
+.products-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.products-heading {
+  color: var(--black);
+}
+
+@media (max-width: 580px) {
+  .products-header {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,26 @@
+.summary-container {
+  flex-basis: 27%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.summary-heading {
+  margin-bottom: 1rem;
+  color: var(--black);
+}
+
+.summary-info {
+  font-size: 1.5rem;
+}
+
+.summary-button {
+  margin-top: 1rem;
+}
+
+@media (max-width: 1180px) {
+  .summary-container {
+    flex-basis: unset;
+  }
+}

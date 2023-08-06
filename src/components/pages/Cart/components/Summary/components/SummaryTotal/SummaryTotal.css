@@ -1,0 +1,9 @@
+.summary-total {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.price-crossed {
+  text-decoration: line-through;
+}

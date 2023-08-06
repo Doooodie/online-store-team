@@ -1,0 +1,10 @@
+.header-img {
+  max-width: 40px;
+  padding: 10px;
+  transition: background-color 0.3s;
+  border-radius: 5px;
+}
+
+.header-img-container:hover > .header-img {
+  background-color: var(--light-brown);
+}
