@@ -4,7 +4,7 @@ The project is an online store copy with list of goods, cart, ability to browse 
 1. Task: https://github.com/rolling-scopes-school/tasks/tree/master/tasks/online-store-team
 2. Screenshot:
 ![image](https://user-images.githubusercontent.com/58595156/211418171-18c50c0f-e2c1-49fa-a17f-b3c4fdc6ebae.png)
-3. Deploy: https://doooodie-online-store-team.netlify.app/
+3. Deploy: https://doodie-store.netlify.app/
 4. Done 10.01.2023 / deadline 10.01.2023
 5. Score: 300 / 300
    
